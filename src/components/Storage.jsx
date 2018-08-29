@@ -1,36 +1,50 @@
 export default class Storege {
-    name = "Frost";
-    TODO = {
-        id: 1,
-        title: "TODO",
-        task: [
-            { id: 11, name: "Buy fish", text: "обновляем массив с задачами" },
-            { id: 12, name: "to ride on horse", text: "EEgogog" }
-        ]
-    }
-
-    InProgress = {
-        id: 2,
-        title: "In Progress",
-        task: []
-    }
-
-    Testing = {
-        id: 3,
-        title: "Testing",
-        task: []
-    }
-
-    Done = {
-        id: 4,
-        title: "Done",
-        task: []
-    }
-    Comments=[
-       {
-           id:11,
-           author:"Vasa",
-           text:"Bla bla bla"
-       }
-    ]  
-}
+    name = "Anon"
+    [
+        {
+            id: "TODO",
+            title: "TODO",
+            cards: [
+                {
+                    id: "Milk",
+                    title: "Buy milk",
+                    description: "2 Gallons of milk"
+                },
+                {
+                    id: "Brod",
+                    title: "Buy brod",
+                    description: "2 bar Brod"
+                },
+            ]
+        },
+        {
+            id: "In Progress",
+            title: "In Progress",
+            cards: [
+                {
+                    id: "Wip1",
+                    title: "Clean House",
+                    description: "Soap wash and polish floor"
+                }
+            ]
+        },
+        {
+            id: "Testing",
+            title: "Testing",
+            cards: [
+                {
+                    id: "Completed1",
+                    title: "Practice Meditation",
+                    description: "Use Headspace app"
+                }
+            ]
+        },
+        {
+            id: "Done",
+            title: "Done",
+            cards: [
+                {}
+            ]
+        }
+    ]
+};

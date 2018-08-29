@@ -61,5 +61,5 @@ export default class ModalGreeting extends React.Component {
       this.root
     );
   }
-}
+};
 
