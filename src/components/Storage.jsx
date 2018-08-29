@@ -1,6 +1,6 @@
 export default class Storege {
     name = "Anon"
-    [
+   [
         {
             id: "TODO",
             title: "TODO",

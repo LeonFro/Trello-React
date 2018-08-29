@@ -18,6 +18,7 @@ render(){
                    <h2>{this.props.storage}</h2> {/* */}
                 </div>
                 <hr />
+                
                 <div className="list-cards">
                   <div className="list-card-details">
                     <span className="card-name"> #1</span>

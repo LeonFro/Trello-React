@@ -4,7 +4,6 @@ import Header from '../src/components/Header';
 import ModalCard from '../src/components/ModalCard';
 import Storage from '../src/components/Storage';
 import Column from '../src/components/Colunm';
-
 import './App.css'
 
 
@@ -41,6 +40,7 @@ export default class App extends Component {
         <Header storage={this.storage} />
         <div className="container">
           <div className="row justify-content-center">
+
             {/* <Column storage={this.storage} cardModal={this.toggleCardModal}/> */}
 
             {this.state.modalCardOpen &&
