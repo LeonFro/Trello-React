@@ -1,19 +1,43 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import '../App.css'
 
 export default class ModalCard extends React.Component {
-    componentWillMount() {
-        this.root = document.createElement('div');
-        document.body.appendChild(this.root);
+    constructor(props){
+        super(props)
+        this.state={
+
+        }
+        this.handleKeyUp = this.handleKeyUp.bind(this);
+      
     }
 
-    componentWillUnmount() {
-        document.body.removeChild(this.root);
-    }
+    componentDidMount() {
+        window.addEventListener("keyup", this.handleKeyUp, false);
+     
+      }
+
+      componentWillUnmount() {
+        window.removeEventListener("keyup", this.handleKeyUp, false);
+       
+      }
+
+      handleKeyUp(e) {
+        const { onCloseRequest } = this.props;
+        const keys = {
+          27: () => {
+            e.preventDefault();
+            onCloseRequest();
+            window.removeEventListener("keyup", this.handleKeyUp, false);
+          }
+        };
+        if (keys[e.keyCode]) {
+          keys[e.keyCode]();
+        }
+      };
+
 
     render() {
-        return ReactDOM.createPortal(
+        return (
             <div className="modal" tabIndex="-1" role="dialog">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
@@ -33,7 +57,7 @@ export default class ModalCard extends React.Component {
                                 <button type="button" className="btn btn-primary" onClick={this.props.onClose}>Save</button>
                             </div>
                             <div className="comment">
-                            <h5 className="modal-title">Name</h5>
+                            <h5 className="modal-title">{this.props.storage.name}</h5>
                             <div className="text-comment">Text comment</div>
                                <a href="">Delete</a> <a href="">Edit</a>
                             </div>
@@ -44,8 +68,7 @@ export default class ModalCard extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div>,
-            this.root
+            </div>
         );
     }
 }

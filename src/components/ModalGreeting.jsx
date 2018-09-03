@@ -1,65 +1,53 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {ModalGreetService} from '../services/ModalGreetService';
+
 import '../App.css'
 
 export default class ModalGreeting extends React.Component {
-  constructor(props){
+
+  constructor(props) {
     super(props)
-    this.modalGreetService = new ModalGreetService(props.storage)
-    this.state={
-     name:''
+    this.state = {
+      name: ''
     }
-     this.changeName=this.changeName.bind(this);
+    this.handleChangeName=this.handleChangeName.bind(this);
+    this.thisInput = this.thisInput.bind(this);
   };
 
-   changeName=(e)=>{
+  handleChangeName (e){
     e.preventDefault();
     let name = this.state.name;
-     if(name){ 
-       this.modalGreetService.changeName(name); 
-       this.props.onChange()
-       this.setState({name:''})
+    if (name) {
+      this.props.changeName(name);
+      this.props.onChange()
+      this.setState({ name: '' })
     }
-   };
+  };
 
-     thisInput=(e)=>{
+  thisInput(e){
     let name = e.target.value;
-    this.setState({name})
-   };
-
-
-  componentWillMount() {
-    this.root = document.createElement('div');
-    document.body.appendChild(this.root);
-  }
-
-  componentWillUnmount() {
-    document.body.removeChild(this.root);
-  }
+    this.setState({ name })
+  };
 
   render() {
-    return ReactDOM.createPortal(
-      <div className="modal" tabIndex="-1" role="dialog">
-        <div className="modal-dialog" role="document">
+    return (
+      <div className="modal" >
+        <div className="modal-dialog" >
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title">How is your name a stranger?</h5>
             </div>
             <div className="modal-body">
-             <form className="form-inline" onSubmit={this.changeName}>{/*  */}
-                <input type="text" className="form-control" id="input" placeholder="You name..." 
-                value={this.state.name} onChange={this.thisInput}/>    {/*  */}
-              <button type="submit" className="btn btn-primary">Done</button>
-            </form>
+              <form className="form-inline" onSubmit={this.handleChangeName}>
+                <input type="text" className="form-control" id="input" placeholder="You name..."
+                  value={this.state.name} onChange={this.thisInput} required />
+                <button type="submit" className="btn btn-primary">Done</button>
+              </form>
             </div>
             <div className="modal-footer">
             </div>
           </div>
         </div>
-      </div>,
-      this.root
+      </div>
     );
   }
-};
-
+}
