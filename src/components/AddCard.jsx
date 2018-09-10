@@ -10,7 +10,7 @@ export default class AddCard extends React.Component {
         }
     };
 
-    newCard=()=> {
+    newCard = () => {
         this.setState({ isEdit: false });
         let newCard = this.refs.newCard.value;
         let idCard = this.props.id;
@@ -21,7 +21,7 @@ export default class AddCard extends React.Component {
         return (
             <div>
                 <input type="text" className="form-control"
-                    ref="newCard" name="card"/>
+                    ref="newCard" name="card" />
                 <button type="submit" className="btn btn-warning pull-right"
                     onClick={this.newCard}>Save</button>
             </div>
@@ -40,12 +40,12 @@ export default class AddCard extends React.Component {
 };
 
 AddCard.propTypes = {
-    newCard:PropTypes.func,
-    isEdit:PropTypes.bool,
-    editTitle:PropTypes.func,
-    noEdit:PropTypes.func,
-  };
-  AddCard.defaultProps = {
+    newCard: PropTypes.func,
+    isEdit: PropTypes.bool,
+    editTitle: PropTypes.func,
+    noEdit: PropTypes.func,
+};
+AddCard.defaultProps = {
     modalGreetingOpen: true,
     modalCardOpen: false,
 };

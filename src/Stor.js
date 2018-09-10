@@ -1,6 +1,6 @@
 const storage = {
-    name:"Annon",
-    nameColumn : [
+    name: "Annon",
+    nameColumn: [
         {
             id: "todo",
             name: 'TODO'
@@ -17,7 +17,7 @@ const storage = {
             id: 'done',
             name: 'Done'
         }],
-    todo : [
+    todo: [
         {
             id: 4,
             title: "Buy milk",
@@ -29,7 +29,7 @@ const storage = {
             description: "2 bar Brod"
         },
     ],
-    inProgress : [
+    inProgress: [
         {
             id: 6,
             title: "Clean House",
@@ -37,15 +37,15 @@ const storage = {
         }
     ],
 
-    testing : [
+    testing: [
         {
             id: 7,
             title: "Practice Meditation",
             description: "Use Headspace app"
         }
     ],
-    done : [{}],
-    comments : [
+    done: [{}],
+    comments: [
         {
             idCard: 4,
             id: 8,

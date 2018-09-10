@@ -43,12 +43,12 @@ export default class Title extends React.Component {
 
 };
 Title.propTypes = {
-    changeTitle:PropTypes.func,
-    isEdit:PropTypes.bool,
-    noEdit:PropTypes.func,
-    editTitle:PropTypes.func,
-    title:PropTypes.string,
-  };
-Title.defaultProps = { 
-    title:"Title column"
-  };
+    changeTitle: PropTypes.func,
+    isEdit: PropTypes.bool,
+    noEdit: PropTypes.func,
+    editTitle: PropTypes.func,
+    title: PropTypes.string,
+};
+Title.defaultProps = {
+    title: "Title column"
+};

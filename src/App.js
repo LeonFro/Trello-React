@@ -17,31 +17,35 @@ export default class App extends Component {
     };
   };
 
-  addName = (name) => { //Side Effects
-    this.state.storage.name = name
-    this.setState({})
+  addName = (name) => {
+    let storage = { ...this.state.storage };
+    storage.name = name;
+    this.setState({ storage })
   };
 
   addCard = (idCard, newCard) => {
     let newId = Date.now();
+    let card = {
+      id: newId,
+      title: newCard,
+      description: ''
+    };
+    let storage = { ...this.state.storage };
     if (newCard) {
-      this.state.storage[idCard].push({ //Side Effects
-        id: newId,
-        title: newCard,
-        description: ''
-      });
-      this.setState({})
-    }
+      storage[idCard].push(card);
+    };
+    this.setState({ storage });
   };
 
   saveTitle = (idCard, title) => {
-    this.state.storage.nameColumn.map(data => {
-      if (data.id === idCard) { //Side Effects
+    let storage = { ...this.state.storage };
+    storage.nameColumn.map(data => {
+      if (data.id === idCard) {
         data.name = title;
       }
       return data;
     })
-    this.setState({})
+    this.setState({ storage })
   };
 
   toggleGreetingModal = () => {
@@ -49,61 +53,68 @@ export default class App extends Component {
   };
 
   onAddDescription = (id, nameColumn, text) => {
-    this.state.storage[nameColumn].map(data => {
+    let storage = { ...this.state.storage };
+    storage[nameColumn].map(data => {
       if (data.id === id) {
-        data.description = text;//Side Effects
+        data.description = text;
       }
       return data;
     })
-    this.setState({});
+    this.setState({ storage });
   };
 
   onDeletCard = (idCard, nameColumn) => {
-    let indexCard = this.state.storage[nameColumn].findIndex(x => {
+    let storage = { ...this.state.storage };
+    let indexCard = storage[nameColumn].findIndex(x => {
       return x.id === idCard;
     });
-    this.state.storage[nameColumn].splice(indexCard, 1);
-    this.setState({});
+    storage[nameColumn].splice(indexCard, 1);
+    this.setState({ storage });
   };
 
   onAddComment = (idCard, text) => {
+    let storage = { ...this.state.storage };
     let newId = Date.now();
+    let comment = {
+      idCard: idCard,
+      id: newId,
+      comment: text,
+    }
     if (text) {
-      this.state.storage.comments.push({//Side Effects
-        idCard: idCard,
-        id: newId,
-        comment: text,
-      });
+      storage.comments.push(comment);
     };
-    this.setState({});
+    this.setState({ storage });
   };
 
   onDeletComment = (idComment) => {
-    let indexComment = this.state.storage.comments.findIndex(x => {
+    let storage = { ...this.state.storage };
+    let indexComment = storage.comments.findIndex(x => {
       return x.id === idComment;
     });
-    this.state.storage.comments.splice(indexComment, 1);
-    this.setState({});
+    storage.comments.splice(indexComment, 1);
+    this.setState({ storage });
   };
 
   changeComment = (idComment, textComment) => {
-    this.state.storage.comments.map(data => {
+    let storage = { ...this.state.storage };
+    storage.comments.map(data => {
       if (data.id === idComment) {
-        data.comment = textComment;//Side Effects
+        data.comment = textComment;
       }
       return data;
     })
-    this.setState({});
+    this.setState({ storage });
   };
 
   changeTitleCard = (idCard, nameColumn, textTitleCard) => {
-    this.state.storage[nameColumn].map(data => {
+    let storage = { ...this.state.storage };
+    storage[nameColumn].map(data => {
       if (data.id === idCard) {
-        data.title = textTitleCard;//Side Effects
+        data.title = textTitleCard;
       }
       return data;
     })
-    this.setState({});
+    this.setState({ storage });
   };
 
   render() {
@@ -120,6 +131,7 @@ export default class App extends Component {
         <div className="container">
 
           <div className="row justify-content-center">
+
             <Column id="todo" key={"todo"}
               title={storage.nameColumn[0].name}
               storage={storage}

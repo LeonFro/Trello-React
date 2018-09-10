@@ -9,9 +9,9 @@ function Header(props) {
     )
 };
 Header.propTypes = {
-    name:PropTypes.string.isRequired,
-  };
+    name: PropTypes.string.isRequired,
+};
 Header.defaultProps = {
-    name:"Annon"
-  };
+    name: "Annon"
+};
 export default Header;

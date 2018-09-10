@@ -12,14 +12,14 @@ export default class Description extends React.Component {
 
     saveText = () => {
         this.setState({ isEditDescription: false })
-        let valueTextArea=this.refs.text.value;
+        let valueTextArea = this.refs.text.value;
         let idCard = this.props.id;
         let idColumn = this.props.idColumn;
-        this.props.addText(idCard,idColumn,valueTextArea);
+        this.props.addText(idCard, idColumn, valueTextArea);
     }
 
     editDescription() {
-        const {description}=this.props;
+        const { description } = this.props;
         return (<div>
             <textarea name="form-control"
                 className="form-control"
@@ -34,7 +34,7 @@ export default class Description extends React.Component {
     };
 
     noEdit() {
-        const {description}=this.props;
+        const { description } = this.props;
         return (
             <div onClick={() => this.setState({ isEditDescription: true })}>
                 <h5 className="modal-title">Description</h5>
@@ -49,14 +49,14 @@ export default class Description extends React.Component {
     };
 };
 Description.propTypes = {
-    saveText:PropTypes.func,
-    editDescription:PropTypes.func,
-    noEdit:PropTypes.func,
-    isEditDescription:PropTypes.bool,
-    description:PropTypes.any,
-  };
+    saveText: PropTypes.func,
+    editDescription: PropTypes.func,
+    noEdit: PropTypes.func,
+    isEditDescription: PropTypes.bool,
+    description: PropTypes.any,
+};
 
-  Description.defaultProps = {
+Description.defaultProps = {
     isEditDescription: false,
-    description:'text description'
-  };
+    description: 'text description'
+};

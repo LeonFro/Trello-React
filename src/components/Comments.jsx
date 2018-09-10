@@ -52,13 +52,13 @@ export default class Comments extends React.Component {
 
 };
 Comments.propTypes = {
-    removeComment:PropTypes.func,
-    editComment:PropTypes.func,
-    isEdit:PropTypes.bool,
-    data:PropTypes.object,
-    comment:PropTypes.any,
-  }
-  Comments.defaultProps = {
-     isEdit: false,
-     comment:"text comment"
-  };
+    removeComment: PropTypes.func,
+    editComment: PropTypes.func,
+    isEdit: PropTypes.bool,
+    data: PropTypes.object,
+    comment: PropTypes.any,
+}
+Comments.defaultProps = {
+    isEdit: false,
+    comment: "text comment"
+};

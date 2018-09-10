@@ -11,13 +11,13 @@ export default class Card extends React.Component {
         }
     };
 
-    toggleCardModal=()=> {
-        this.setState( state =>({ modalCardOpen: !state.modalCardOpen }));
-      };
+    toggleCardModal = () => {
+        this.setState(state => ({ modalCardOpen: !state.modalCardOpen }));
+    };
 
 
     render() {
-        const{data,storage,title,description,id,idColumn}=this.props;
+        const { data, storage, title, description, id, idColumn } = this.props;
         let sumComments = this.props.storage.comments.filter(x => x.idCard === id).length;
         return (
             <div className="col border list-cards">
@@ -28,9 +28,9 @@ export default class Card extends React.Component {
                 </div>
 
                 {this.state.modalCardOpen &&
-                    <ModalCard   
+                    <ModalCard
                         storage={storage}
-                        description={description}      
+                        description={description}
                         title={title}
                         data={data}
                         idColumn={idColumn}
@@ -42,7 +42,7 @@ export default class Card extends React.Component {
                         addTextComment={this.props.addComment}
                         deletThisComment={this.props.deletComment}
                         thisEditComment={this.props.commentEdit}
-                        saveCardTitle={this.props.saveContextTitle}/>
+                        saveCardTitle={this.props.saveContextTitle} />
                 }
 
             </div>
@@ -51,26 +51,26 @@ export default class Card extends React.Component {
 };
 
 Card.propTypes = {
-    toggleCardModal:PropTypes.func,
-    data:PropTypes.object,
-    storage:PropTypes.object.isRequired,
-    description:PropTypes.string,
-    title:PropTypes.string.isRequired,
-    idColumn:PropTypes.any,
-    id:PropTypes.any,
-    onClose:PropTypes.func,
-    onCloseRequest:PropTypes.func,
-    handleAddText:PropTypes.func,
-    deletThisCard:PropTypes.func,
-    addTextComment:PropTypes.func,
-    deletThisComment:PropTypes.func,
-    thisEditComment:PropTypes.func,
-    sumComments:PropTypes.number.isRequired,
-    saveContextTitle:PropTypes.func.isRequired
+    toggleCardModal: PropTypes.func,
+    data: PropTypes.object,
+    storage: PropTypes.object.isRequired,
+    description: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    idColumn: PropTypes.any,
+    id: PropTypes.any,
+    onClose: PropTypes.func,
+    onCloseRequest: PropTypes.func,
+    handleAddText: PropTypes.func,
+    deletThisCard: PropTypes.func,
+    addTextComment: PropTypes.func,
+    deletThisComment: PropTypes.func,
+    thisEditComment: PropTypes.func,
+    sumComments: PropTypes.number.isRequired,
+    saveContextTitle: PropTypes.func.isRequired
 
-  };
-  Card.defaultProps = {
+};
+Card.defaultProps = {
     modalCardOpen: false,
-    sumComments:0,
-    title:"New card"
+    sumComments: 0,
+    title: "New card"
 };

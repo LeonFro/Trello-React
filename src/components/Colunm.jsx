@@ -8,7 +8,7 @@ import '../App.css';
 export default class Column extends React.Component {
 
   render() {
-    const { data,title,storage,id} = this.props;
+    const { data, title, storage, id } = this.props;
     return (
       <div className="col border border-info rounded">
         <div className="content">
@@ -19,7 +19,7 @@ export default class Column extends React.Component {
               saveTitle={this.props.newTitle} />
           </div>
           <hr />
-          {data.map((cards,i)=>
+          {data.map((cards, i) =>
             <Card
               idColumn={id}
               key={i}
@@ -44,9 +44,9 @@ export default class Column extends React.Component {
 };
 
 Column.propTypes = {
-  id:PropTypes.any,
-  title:PropTypes.string.isRequired,
-  storage:PropTypes.object.isRequired,
-  saveTitle:PropTypes.func,
+  id: PropTypes.any,
+  title: PropTypes.string.isRequired,
+  storage: PropTypes.object.isRequired,
+  saveTitle: PropTypes.func,
 };
 
