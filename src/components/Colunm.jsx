@@ -9,16 +9,19 @@ export default class Column extends React.Component {
 
   render() {
     const { data, title, storage, id } = this.props;
+    
     return (
       <div className="col border border-info rounded">
         <div className="content">
           <div className="header">
+            
             <Title id={id}
               title={title}
               storage={storage}
               saveTitle={this.props.newTitle} />
           </div>
           <hr />
+
           {data.map((cards, i) =>
             <Card
               idColumn={id}
@@ -34,6 +37,7 @@ export default class Column extends React.Component {
               saveContextTitle={this.props.onSaveTitle}
             />)}
           <hr />
+
           <AddCard id={id}
             storage={storage}
             addCard={this.props.addNewCard} />
