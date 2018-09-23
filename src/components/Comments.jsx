@@ -25,7 +25,7 @@ export default class Comments extends React.Component {
     render() {
         const { data, comment } = this.props;
         return (<div className="comment">
-            <h5 className="modal-title">{data.name}</h5>
+            <h5 className="modal-title">{data.card.name}</h5>
             {this.state.isEdit ? <div>
                 <textarea
                     name="form-control"

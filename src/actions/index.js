@@ -10,6 +10,9 @@ export const ADD_COMMENT = "ADD_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const CHANGE_COMMENT = "CHANGE_COMMENT";
 
+export const MODAL_ON= "MODAL_ON";
+export const MODAL_OFF = "MODAL_OFF";
+
 let newId = Date.now();
 
 export function addName(name) {

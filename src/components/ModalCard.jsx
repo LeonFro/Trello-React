@@ -103,7 +103,7 @@ export default class ModalCard extends React.Component {
                                     onClick={this.addComment}>Save</button>
                             </div>
 
-                            {storage.comments.map(comm =>
+                            {storage.card.comments.map(comm =>
                                 comm.idCard === id ?
                                     <Comments
                                         comment={comm.comment}

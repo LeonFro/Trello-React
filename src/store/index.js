@@ -1,10 +1,11 @@
-import {createStore,compose} from 'redux';
-import reducer from '../reducers';
-import storage from '../store/storage';
+import {createStore,compose,applyMiddleware} from 'redux';
+import {rootReducer} from '../reducers/index';
+//import storage from '../store/storage';
+import logger from 'redux-logger'; 
 
-const store = createStore(
-    reducer,
-    storage, 
-    compose(window.devToolsExtension ? window.devToolsExtension() : f => f));
-console.log(store.getState())
-export default store;
+export const store = createStore(
+    rootReducer,
+    compose(window.devToolsExtension ? window.devToolsExtension() : f => f),
+    applyMiddleware(logger)
+    );
+

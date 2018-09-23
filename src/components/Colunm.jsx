@@ -9,7 +9,6 @@ export default class Column extends React.Component {
 
   render() {
     const { data, title, storage, id } = this.props;
-    
     return (
       <div className="col border border-info rounded">
         <div className="content">
@@ -23,7 +22,7 @@ export default class Column extends React.Component {
           <hr />
 
           {data.map((cards, i) =>
-            <Card
+             <Card
               idColumn={id}
               key={i}
               id={cards.id}
@@ -35,7 +34,7 @@ export default class Column extends React.Component {
               deletComment={this.props.commentDelet}
               commentEdit={this.props.onEditComment}
               saveContextTitle={this.props.onSaveTitle}
-            />)}
+            />)} 
           <hr />
 
           <AddCard id={id}

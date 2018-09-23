@@ -18,7 +18,7 @@ export default class Card extends React.Component {
 
     render() {
         const { data, storage, title, description, id, idColumn } = this.props;
-        let sumComments = this.props.storage.comments.filter(x => x.idCard === id).length;
+        let sumComments = storage.card.comments.filter(x => x.idCard === id).length;
         return (
             <div className="col border list-cards">
                 <div className="list-card-details">
