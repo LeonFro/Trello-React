@@ -34,10 +34,10 @@ export default function column(state = initialstate, action) {
 
         case SAVE_TITLE:
             return state.map(data => {
-                 if (data.id === action.idCard) {
-                      data.name = action.title;
-                  }
-                 return data;
+                if (data.id === action.idCard) {
+                    data.name = action.title;
+                }
+                return data;
             })
 
         default:

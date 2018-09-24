@@ -35,12 +35,12 @@ export function changeTitleCard(idCard, nameColumn, textTitleCard) {
     }
 };
 
-export function addDescriptions(nameColumn, text) {
+export function addDescriptions(idCard, nameColumn, text) {
     return {
         type: ADD_DESCRIPTIONS,
         nameColumn,
         text,
-        id: newId,
+        idCard,
     }
 };
 
@@ -130,50 +130,25 @@ export default function card(state = initialstate, action) {
                 [idCard]: state[idCard].filter(note => note.id !== action.columnName),
             });
 
-        case CHANGE_TITLE_CARD:        //Error!
+        case CHANGE_TITLE_CARD:        //DONE
             let nameColumn = action.nameColumn;
-            let textTitleCard = action.textTitleCard;
-            let id = action.idCard;
-
-            return Object.assign({}, state, {
-                [nameColumn]: state[nameColumn].title = state[nameColumn].map(x => {
-                    if (x.id === id) {
-                        return textTitleCard
-                    }
-                }),
+            const newTitle = state[nameColumn].map(x => {
+                if (x.id === action.idCard) {
+                    x.title = action.textTitleCard;
+                };
+                return x;
             });
-
-        // return state[nameColumn].map(x => {
-        //     if (x.id !== action.idCard) {
-        //         return state;
-        //     }     
-        //       return Object.assign({}, state,{title:action.textTitleCard});        
-        //   })
-
-        // return Object.assign({}, state, {
-        //     [nameColumn]: state[nameColumn].title=state[nameColumn].map(x=>{
-        //         if(x.id===id){
-        //            return textTitleCard 
-        //         }
-        //     }),
-        //   });
-        //  let column = action.nameColumn;
-        // return sta[column].map(data => {
-        //     if (data.id === action.idCard) {
-        //         data.title = action.textTitleCard;
-        //     }
-        //     return data;
-        // });
+            return { ...state, [nameColumn]: newTitle }
 
         case ADD_DESCRIPTIONS:   //Error!
-            let colu = action.nameColumn;
-            let storage = { ...state };
-            return storage[colu].map(data => {
-                if (data.id === action.id) {
+            let nameCol = action.nameColumn;
+            const newDesc = state[nameCol].map(data => {
+                if (data.id === action.idCard) {
                     data.description = action.text;
-                }
+                };
                 return data;
             });
+            return { ...state, [nameCol]: newDesc };
 
         case ADD_COMMENT: //DONE
             let comment = {
