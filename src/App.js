@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import ModalGreeting from './containers/ModalGreeting';
 import ColumnContainer from './containers/ColumnContainer';
 import ColumnInProgress from './containers/ColumnInPropgress';
@@ -7,9 +9,8 @@ import ColumnDone from './containers/ColumnDone';
 import Header from './components/Header';
 import './App.css'
 
-
-export default class App extends Component {
-  render() { 
+class App extends Component {
+  render() {
     return (
       <div>
         <ModalGreeting />
@@ -26,6 +27,26 @@ export default class App extends Component {
     )
   }
 };
+
+const mapStateToProps = state => {
+  return {
+    name: state.name.name,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      //actions
+    },
+    dispatch
+  );
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
 
 
 
