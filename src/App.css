@@ -1,26 +1,59 @@
 body{
-  background:rgba(161, 124, 124, 0.664);
+  background:rgba(214, 209, 141, 0.774);
 }
 .App {
   text-align: center;
 }
+.list-cards{
+  margin-left: 0px !important;
+}
+/* Header */
+.navbar{
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 25px;
+  color: goldenrod;
+}
+
 a:hover{
   cursor: pointer;
   color:rgba(165, 35, 30, 0.867)!important;
 }
+/* botton + Add card */
+.add-card{
+  float: right;
+  margin-right: 15px;
+  font-size: initial;
+  font-style: oblique;
+  font-weight: bold;
+}
+/* card in coumns */
 .col{
 background: #eee;
 padding: 10px;
 margin-left: 10px;
 }
+/* card hover*/
 .list-card-details:hover{
   background: rgb(170, 218, 160);
 }
 /* button */
 .btn-info,.btn-sm{
 float: right;
+margin-left: 6px;
+}
+/* button for textArea form modal*/
+.btn-primary{
+float: right;
 }
 
+/* Form in modal card */
+.form-control{
+  display: inline !important;
+}
+
+.badge{
+  margin-left: 6px;
+}
 
 .container{
   margin-top: 10px;

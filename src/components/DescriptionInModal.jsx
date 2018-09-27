@@ -2,21 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class Description extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isEditDescription: false,
-            description: '',
-        }
-    }
+    state = {
+        isEditDescription: false,
+        description: '',
+    };
 
     saveText = () => {
         this.setState({ isEditDescription: false })
         let valueTextArea = this.refs.text.value;
+        if (!valueTextArea.trim()) {
+            return;
+        };
         let idCard = this.props.id;
         let idColumn = this.props.idColumn;
         this.props.addText(idCard, idColumn, valueTextArea);
-    }
+    };
 
     editDescription() {
         const { description } = this.props;

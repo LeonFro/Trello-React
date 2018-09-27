@@ -1,18 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../App.css';
 
 export default class AddCard extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isEdit: false,
-        }
+    state = {
+        isEdit: false,
     };
 
     newCard = () => {
         this.setState({ isEdit: false });
         let newCard = this.refs.newCard.value;
+        if (!newCard.trim()) {
+            return;
+        };
         let idCard = this.props.id;
         this.props.addCard(idCard, newCard);
     };
@@ -21,7 +20,7 @@ export default class AddCard extends React.Component {
         return (
             <div>
                 <input type="text" className="form-control"
-                    ref="newCard" name="card" />
+                    ref="newCard" />
                 <button type="submit" className="btn btn-warning pull-right"
                     onClick={this.newCard}>Save</button>
             </div>
@@ -30,7 +29,10 @@ export default class AddCard extends React.Component {
 
     noEdit() {
         return (
-            <a className="add-card" onClick={() => this.setState({ isEdit: true })}>+ Add card </a>
+            <a className="add-card"
+                onClick={() => this.setState({ isEdit: true })}
+            >+ Add card
+            </a>
         )
     };
 

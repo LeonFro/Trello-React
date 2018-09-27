@@ -1,15 +1,13 @@
-
 export const SAVE_TITLE = "SAVE_TITLE";
-export function saveTitle(idCard, title) {
-    return {
-        type: SAVE_TITLE,
-        idCard,
-        title
-    }
-};
 
-const initialstate =
-    [
+export const saveTitle = (idCard, title) => ({
+    type: SAVE_TITLE,
+    idCard,
+    title
+});
+
+const initialstate = {
+    nameColumn: [
         {
             id: "todo",
             name: "TODO"
@@ -19,7 +17,7 @@ const initialstate =
             name: "In Progress"
         },
         {
-            id: "testing",
+            id: "test",
             name: "Test"
         },
         {
@@ -27,18 +25,18 @@ const initialstate =
             name: "Done"
         }
     ]
-    ;
+};
 
 export default function column(state = initialstate, action) {
     switch (action.type) {
-
         case SAVE_TITLE:
-            return state.map(data => {
-                if (data.id === action.idCard) {
-                    data.name = action.title;
-                }
-                return data;
-            })
+            const newNameColumn = state.nameColumn.map(x => {
+                if (x.id === action.idCard) {
+                    x.name = action.title;
+                };
+                return x;
+            });
+            return { ...state, nameColumn: newNameColumn };
 
         default:
             return state;

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../App.css';
 
 export default class Title extends React.Component {
     constructor(props) {
@@ -13,19 +12,24 @@ export default class Title extends React.Component {
     changeTitle = () => {
         this.setState({ isEdit: false });
         let newTitle = this.refs.title.value;
+        if (!newTitle.trim()) {
+            return;
+        };
         let titleId = this.props.id;
         this.props.saveTitle(titleId, newTitle);
     };
 
     editTitle() {
         return (
-            <div>
-                <input type="text" className="form-control"
-                    defaultValue={this.props.title}
-                    required
-                    ref="title" />
+            <div className="row justify-content-md-center">
+                <div className="col-md-8">
+                    <input type="text" className="form-control"
+                        defaultValue={this.props.title}
+                        required
+                        ref="title" />
+                </div>
                 <button type="submit"
-                    className="btn btn-primary pull-right"
+                    className="btn btn-primary pull-right col-md-2"
                     onClick={this.changeTitle}>Ok</button>
             </div>
         )

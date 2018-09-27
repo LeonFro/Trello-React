@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Header(props) {
+const Header = (props) => {
     return (
-        <nav className="navbar navbar-dark bg-primary">
+        <nav className="navbar navbar-light bg-light">
             <a className="navbar-brand" >{props.name}</a>
         </nav>
     )
@@ -11,7 +11,7 @@ function Header(props) {
 Header.propTypes = {
     name: PropTypes.string.isRequired,
 };
- Header.defaultProps = {
-     name: "Annon"
- };
+Header.defaultProps = {
+    name: "Annon"
+};
 export default Header;

@@ -2,15 +2,11 @@ import React from 'react';
 import Description from '../components/DescriptionInModal';
 import Comments from '../components/Comments';
 import PropTypes from 'prop-types';
-import '../App.css';
 
 export default class ModalCard extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isEditTitle: false,
-            isEditDescripton: false,
-        };
+    state = {
+        isEditTitle: false,
+        isEditDescripton: false,
     };
 
     componentDidMount() {
@@ -38,6 +34,9 @@ export default class ModalCard extends React.Component {
     addComment = () => {
         let valueTextArea = this.refs.text.value;
         let idCard = this.props.id;
+        if (!valueTextArea.trim()) {
+            return;
+        };
         this.props.addTextComment(idCard, valueTextArea);
         this.refs.text.value = "";
     };
@@ -52,6 +51,9 @@ export default class ModalCard extends React.Component {
     editTitleCard = () => {
         this.setState({ isEditTitle: false });
         let valueTextTitle = this.refs.title.value;
+        if (!valueTextTitle.trim()) {
+            return;
+        };
         let idCard = this.props.id;
         let idColumn = this.props.idColumn;
         this.props.saveCardTitle(idCard, idColumn, valueTextTitle);
@@ -103,11 +105,11 @@ export default class ModalCard extends React.Component {
                                     onClick={this.addComment}>Save</button>
                             </div>
 
-                            {storage.card.comments.map(comm =>
+                            {storage.card.comments.map((comm, i) =>
                                 comm.idCard === id ?
                                     <Comments
                                         comment={comm.comment}
-                                        key={comm.id}
+                                        key={i}
                                         id={comm.id}
                                         data={storage}
                                         deletComment={this.props.deletThisComment}

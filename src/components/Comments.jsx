@@ -1,13 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../App.css';
 
 export default class Comments extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isEdit: false,
-        };
+    state = {
+        isEdit: false,
     };
 
     removeComment = () => {
@@ -18,8 +14,11 @@ export default class Comments extends React.Component {
     editComment = () => {
         this.setState({ isEdit: false });
         let textComment = this.refs.text.value;
-        let idComment = this.props.id;
-        this.props.isEditComment(idComment, textComment);
+        if (!textComment.trim()) {
+            return;
+        };
+            let idComment = this.props.id;
+            this.props.isEditComment(idComment, textComment);
     };
 
     render() {

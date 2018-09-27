@@ -3,7 +3,6 @@ import Card from './Card';
 import Title from './Title';
 import AddCard from './AddCard';
 import PropTypes from 'prop-types';
-import '../App.css';
 
 export default class Column extends React.Component {
 
@@ -20,7 +19,7 @@ export default class Column extends React.Component {
               saveTitle={this.props.newTitle} />
           </div>
           <hr />
-
+          
           {data.map((cards, i) =>
              <Card
               idColumn={id}

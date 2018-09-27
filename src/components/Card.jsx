@@ -1,20 +1,15 @@
 import React from 'react';
 import ModalCard from '../components/ModalCard';
 import PropTypes from 'prop-types';
-import '../App.css';
 
 export default class Card extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            modalCardOpen: false,
-        }
+    state = {
+        modalCardOpen: false,
     };
 
     toggleCardModal = () => {
         this.setState(state => ({ modalCardOpen: !state.modalCardOpen }));
     };
-
 
     render() {
         const { data, storage, title, description, id, idColumn } = this.props;
@@ -24,7 +19,7 @@ export default class Card extends React.Component {
                 <div className="list-card-details">
                     <span className="card-name">{title}</span>
                     <button type="button" className="btn btn-secondary btn-sm" disabled><i className="far fa-comment-dots"></i>{sumComments}</button>
-                    <button type="button" className="btn btn-info" onClick={this.toggleCardModal}><i className="fas fa-pencil-alt"></i></button>
+                    <button type="button" className="btn btn-info btn-sm" onClick={this.toggleCardModal}><i className="fas fa-pencil-alt"></i></button>
                 </div>
 
                 {this.state.modalCardOpen &&
@@ -34,7 +29,7 @@ export default class Card extends React.Component {
                         title={title}
                         data={data}
                         idColumn={idColumn}
-                        id={id}
+                        id={this.props.id}
                         onClose={this.toggleCardModal}
                         onCloseRequest={() => this.toggleCardModal()}
                         handleAddText={this.props.addTextDescription}
