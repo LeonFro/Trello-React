@@ -10,19 +10,23 @@ const initialstate = {
     nameColumn: [
         {
             id: "todo",
-            name: "TODO"
+            name: "TODO",
+            
         },
         {
             id: "inProgress",
-            name: "In Progress"
+            name: "In Progress",
+          
         },
         {
             id: "test",
-            name: "Test"
+            name: "Test",
+           
         },
         {
             id: "done",
-            name: "Done"
+            name: "Done",
+           
         }
     ]
 };
@@ -36,7 +40,7 @@ export default function column(state = initialstate, action) {
                 };
                 return x;
             });
-            return { ...state, nameColumn: newNameColumn };
+            return { ...state, nameColumn: newNameColumn};
 
         default:
             return state;

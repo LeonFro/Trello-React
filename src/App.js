@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ModalGreeting from './components/ModalGreeting';
 import Column from './components/Colunm';
 import Header from './components/Header';
@@ -18,9 +18,7 @@ import {
 import { saveTitle } from './reducers/column';
 import './App.css'
 
-class App extends Component {
-  render() {
-    const { name,
+const App = ({ name,
       addName,
       storage,
       data,
@@ -32,10 +30,11 @@ class App extends Component {
       addComment,
       deleteComment,
       cangeComment,
-      changeTitleCard } = this.props
+      changeTitleCard,
+      modalGreetingOpen }) => {
     return (
       <div>
-        <ModalGreeting setName={addName} />
+        <ModalGreeting setName={addName} modalGreetingOpen={modalGreetingOpen} />
         <Header name={name} />
         <div className="container">
           <div className="row justify-content-center">
@@ -79,15 +78,15 @@ class App extends Component {
         </div>
       </div>
     )
-  }
-};
+  };
 
 const mapStateToProps = state => {
   return {
     name: state.name.name,
     storage: state,
-    data: state.card,
-    title: state.column.nameColumn,
+     data: state.card,
+     title: state.column.nameColumn,
+    modalGreetingOpen: state.name.modalGreetingOpen,
   };
 };
 
@@ -126,4 +125,5 @@ App.propTypes = {
   storage: PropTypes.object.isRequired,
   title: PropTypes.array.isRequired,
 };
+
 

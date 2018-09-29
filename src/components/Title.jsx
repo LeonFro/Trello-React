@@ -2,13 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class Title extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+        state = {
             isEdit: false,
-        }
-    };
-
+        };
+    
     changeTitle = () => {
         this.setState({ isEdit: false });
         let newTitle = this.refs.title.value;

@@ -61,7 +61,7 @@ Card.propTypes = {
     deletThisComment: PropTypes.func,
     thisEditComment: PropTypes.func,
     sumComments: PropTypes.number.isRequired,
-    saveContextTitle: PropTypes.func.isRequired
+    saveContextTitle: PropTypes.func
 
 };
 Card.defaultProps = {

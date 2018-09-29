@@ -16,6 +16,7 @@ export default function name(state = initialstate, action) {
     switch (action.type) {
         case ADD_NAME:
             let name = action.name;
+            if (!name.trim()) { return state };
             return { ...state, name, modalGreetingOpen: false, };
         default:
             return state;

@@ -18,10 +18,11 @@ export default class AddCard extends React.Component {
 
     editTitle() {
         return (
-            <div>
-                <input type="text" className="form-control"
-                    ref="newCard" />
-                <button type="submit" className="btn btn-warning pull-right"
+            <div className="row justify-content-md-center">
+                <div className="col-md-8">
+                    <input type="text" className="form-control"
+                        ref="newCard" /></div>
+                <button type="submit" className="btn btn-warning pull-right col-md-3"
                     onClick={this.newCard}>Save</button>
             </div>
         )
