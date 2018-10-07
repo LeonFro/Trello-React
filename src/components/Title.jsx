@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class Title extends React.Component {
-        state = {
-            isEdit: false,
-        };
-    
+    state = {
+        isEditFormTitle: false,
+    };
+
     changeTitle = () => {
-        this.setState({ isEdit: false });
+        this.setState({ isEditFormTitle: false });
         let newTitle = this.refs.title.value;
         if (!newTitle.trim()) {
             return;
@@ -16,39 +16,32 @@ export default class Title extends React.Component {
         this.props.saveTitle(titleId, newTitle);
     };
 
-    editTitle() {
-        return (
-            <div className="row justify-content-md-center">
-                <div className="col-md-8">
-                    <input type="text" className="form-control"
-                        defaultValue={this.props.title}
-                        required
-                        ref="title" />
-                </div>
-                <button type="submit"
-                    className="btn btn-primary pull-right col-md-2"
-                    onClick={this.changeTitle}>Ok</button>
-            </div>
-        )
-    };
-
-    noEdit() {
-        return (
-            <h2 onClick={() => this.setState({ isEdit: true })}>{this.props.title}</h2>
-        )
-    };
-
     render() {
-        return this.state.isEdit ? this.editTitle() : this.noEdit()
+        const {title} = this.props;
+        const { isEditFormTitle } = this.state;
+        return (
+            (isEditFormTitle) ?
+                <div className="row justify-content-md-center">
+                    <div className="col-md-8">
+                        <input type="text" className="form-control"
+                            defaultValue={title}
+                            required
+                            ref="title" />
+                    </div>
+                    <button type="submit"
+                        className="btn btn-primary pull-right col-md-2"
+                        onClick={this.changeTitle}>Ok</button>
+                </div> :
+                <h2 onClick={() => this.setState({ isEditFormTitle: true })}>
+                    {title}
+                </h2>)
     };
 
 };
 Title.propTypes = {
     changeTitle: PropTypes.func,
-    isEdit: PropTypes.bool,
-    noEdit: PropTypes.func,
-    editTitle: PropTypes.func,
-    title: PropTypes.string,
+    isEditFormTitle: PropTypes.bool,
+    title: PropTypes.string.isRequired,
 };
 Title.defaultProps = {
     title: "Title column"

@@ -18,75 +18,97 @@ import {
 import { saveTitle } from './reducers/column';
 import './App.css'
 
-const App = ({ name,
-      addName,
-      storage,
-      data,
-      title,
-      addCard,
-      saveTitle,
-      deleteCard,
-      addDescriptions,
-      addComment,
-      deleteComment,
-      cangeComment,
-      changeTitleCard,
-      modalGreetingOpen }) => {
-    return (
-      <div>
-        <ModalGreeting setName={addName} modalGreetingOpen={modalGreetingOpen} />
-        <Header name={name} />
-        <div className="container">
-          <div className="row justify-content-center">
-            <Column storage={storage} data={data.todo} id="todo" title={title[0].name}
-              addNewCard={addCard}
-              newTitle={saveTitle}
-              deletCard={deleteCard}
-              addText={addDescriptions}
-              addNewComment={addComment}
-              commentDelet={deleteComment}
-              onEditComment={cangeComment}
-              onSaveTitle={changeTitleCard} />
-            <Column storage={storage} data={data.inProgress} id="inProgress" title={title[1].name}
-              addNewCard={addCard}
-              newTitle={saveTitle}
-              deletCard={deleteCard}
-              addText={addDescriptions}
-              addNewComment={addComment}
-              commentDelet={deleteComment}
-              onEditComment={cangeComment}
-              onSaveTitle={changeTitleCard} />
-            <Column storage={storage} data={data.test} id="test" title={title[2].name}
-              addNewCard={addCard}
-              newTitle={saveTitle}
-              deletCard={deleteCard}
-              addText={addDescriptions}
-              addNewComment={addComment}
-              commentDelet={deleteComment}
-              onEditComment={cangeComment}
-              onSaveTitle={changeTitleCard} />
-            <Column storage={storage} data={data.done} id="done" title={title[3].name}
-              addNewCard={addCard}
-              newTitle={saveTitle}
-              deletCard={deleteCard}
-              addText={addDescriptions}
-              addNewComment={addComment}
-              commentDelet={deleteComment}
-              onEditComment={cangeComment}
-              onSaveTitle={changeTitleCard} />
-          </div>
+const App = ({
+  name,
+  addName,
+  cardList,
+  columnTitleList,
+  listComments,
+  addCard,
+  saveTitle,
+  deleteCard,
+  addDescriptions,
+  addComment,
+  deleteComment,
+  cangeComment,
+  changeTitleCard,}) => {
+  return (
+    <div>
+
+      <ModalGreeting
+        setName={addName} />
+      <Header name={name} />
+
+      <div className="container">
+        <div className="row justify-content-center">
+          <Column
+            name={name}
+            cardList={cardList.todo}
+            id="todo"
+            title={columnTitleList[0].name}
+            listComments={listComments}
+            addNewCard={addCard}
+            newTitle={saveTitle}
+            deletCard={deleteCard}
+            addText={addDescriptions}
+            addNewComment={addComment}
+            commentDelet={deleteComment}
+            onEditComment={cangeComment}
+            onSaveTitle={changeTitleCard} />
+          <Column
+            name={name}
+            cardList={cardList.inProgress}
+            id="inProgress"
+            title={columnTitleList[1].name}
+            listComments={listComments}
+            addNewCard={addCard}
+            newTitle={saveTitle}
+            deletCard={deleteCard}
+            addText={addDescriptions}
+            addNewComment={addComment}
+            commentDelet={deleteComment}
+            onEditComment={cangeComment}
+            onSaveTitle={changeTitleCard} />
+          <Column
+            name={name}
+            cardList={cardList.test}
+            id="test"
+            title={columnTitleList[2].name}
+            listComments={listComments}
+            addNewCard={addCard}
+            newTitle={saveTitle}
+            deletCard={deleteCard}
+            addText={addDescriptions}
+            addNewComment={addComment}
+            commentDelet={deleteComment}
+            onEditComment={cangeComment}
+            onSaveTitle={changeTitleCard} />
+          <Column
+            name={name}
+            cardList={cardList.done}
+            id="done"
+            title={columnTitleList[3].name}
+            listComments={listComments}
+            addNewCard={addCard}
+            newTitle={saveTitle}
+            deletCard={deleteCard}
+            addText={addDescriptions}
+            addNewComment={addComment}
+            commentDelet={deleteComment}
+            onEditComment={cangeComment}
+            onSaveTitle={changeTitleCard} />
         </div>
       </div>
-    )
-  };
+    </div>
+  )
+};
 
 const mapStateToProps = state => {
   return {
     name: state.name.name,
-    storage: state,
-     data: state.card,
-     title: state.column.nameColumn,
-    modalGreetingOpen: state.name.modalGreetingOpen,
+    listComments: state.card.comments,
+    cardList: state.card,
+    columnTitleList: state.column.nameColumn,
   };
 };
 
@@ -112,18 +134,20 @@ export default connect(
 )(App);
 
 App.propTypes = {
-  addNewCard: PropTypes.func,
-  newTitle: PropTypes.func,
-  deletCard: PropTypes.func,
-  addText: PropTypes.func,
-  addNewComment: PropTypes.func,
-  commentDelet: PropTypes.func,
-  onEditComment: PropTypes.func,
-  onSaveTitle: PropTypes.func,
+  saveTitle: PropTypes.func.isRequired,
+  addName: PropTypes.func.isRequired,
+  addCard: PropTypes.func.isRequired,
+  deleteCard: PropTypes.func.isRequired,
+  addDescriptions: PropTypes.func.isRequired,
+  addComment: PropTypes.func.isRequired,
+  deleteComment: PropTypes.func.isRequired,
+  cangeComment: PropTypes.func.isRequired,
+  changeTitleCard: PropTypes.func.isRequired,
   id: PropTypes.string,
-  data: PropTypes.object.isRequired,
-  storage: PropTypes.object.isRequired,
-  title: PropTypes.array.isRequired,
+  cardList: PropTypes.object.isRequired,
+  columnTitleList: PropTypes.array.isRequired,
+  name: PropTypes.string,
+  listComments: PropTypes.array.isRequired,
 };
 
 

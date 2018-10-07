@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class Comments extends React.Component {
     state = {
-        isEdit: false,
+        changeFormComment: false,
     };
 
     removeComment = () => {
@@ -12,37 +12,38 @@ export default class Comments extends React.Component {
     };
 
     editComment = () => {
-        this.setState({ isEdit: false });
+        this.setState({ changeFormComment: false });
         let textComment = this.refs.text.value;
         if (!textComment.trim()) {
             return;
         };
-            let idComment = this.props.id;
-            this.props.isEditComment(idComment, textComment);
+        let idComment = this.props.id;
+        this.props.isEditComment(idComment, textComment);
     };
 
     render() {
-        const { data, comment } = this.props;
+        const { name, comment } = this.props;
         return (<div className="comment">
-            <h5 className="modal-title">{data.card.name}</h5>
-            {this.state.isEdit ? <div>
-                <textarea
-                    name="form-control"
-                    className="form-control"
-                    rows="2"
-                    defaultValue={comment}
-                    ref="text">
-                </textarea>
-                <button type="submit"
-                    className="btn btn-primary"
-                    onClick={this.editComment}>Ok</button>
-            </div> :
+            <h5 className="modal-title">{name}</h5>
+            {this.state.changeFormComment ?
+                <div>
+                    <textarea
+                        name="form-control"
+                        className="form-control"
+                        rows="2"
+                        defaultValue={comment}
+                        ref="text">
+                    </textarea>
+                    <button type="submit"
+                        className="btn btn-primary"
+                        onClick={this.editComment}>Ok</button>
+                </div> :
                 <div>
                     <div className="text-comment">{comment}</div>
                     <a className="badge badge-danger"
                         onClick={this.removeComment}>Delete</a>
                     <a className="badge badge-success"
-                        onClick={() => this.setState({ isEdit: true })}>Edit</a>
+                        onClick={() => this.setState({ changeFormComment: true })}>Edit</a>
                 </div>
             }
         </div>
@@ -53,11 +54,12 @@ export default class Comments extends React.Component {
 Comments.propTypes = {
     removeComment: PropTypes.func,
     editComment: PropTypes.func,
-    isEdit: PropTypes.bool,
-    data: PropTypes.object,
-    comment: PropTypes.any,
-}
+    changeFormComment: PropTypes.bool.isRequired,
+    comment: PropTypes.string,
+    name: PropTypes.string.isRequired,
+};
 Comments.defaultProps = {
-    isEdit: false,
-    comment: "text comment"
+    changeFormComment: false,
+    comment: "text comment",
+    name: "Annon",
 };

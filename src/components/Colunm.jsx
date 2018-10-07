@@ -4,18 +4,20 @@ import Title from './Title';
 import AddCard from './AddCard';
 import PropTypes from 'prop-types';
 
-const Column = ({ data,
+const Column = ({
+  name,
+  cardList,
   title,
-  storage,
-  id, newTitle,
+  id,
+  newTitle,
   addText,
   deletCard,
   addNewComment,
   commentDelet,
   onEditComment,
   onSaveTitle,
-  addNewCard }) => {
-
+  addNewCard,
+  listComments }) => {
   return (
     <div className="col border border-info rounded">
       <div className="content">
@@ -23,18 +25,20 @@ const Column = ({ data,
 
           <Title id={id}
             title={title}
-            storage={storage}
-            saveTitle={newTitle} />
+            saveTitle={newTitle}
+          />
         </div>
         <hr />
 
-        {data.map((cards, i) =>
+        {cardList.map((cards, i) =>
           <Card
             idColumn={id}
             key={i}
             id={cards.id}
-            {...cards}
-            storage={storage}
+            name={name}
+            cardList={cards}
+            titleCard={cards.title}
+            listComments={listComments}
             addTextDescription={addText}
             cardRemove={deletCard}
             addComment={addNewComment}
@@ -45,19 +49,16 @@ const Column = ({ data,
         <hr />
 
         <AddCard id={id}
-          storage={storage}
           addCard={addNewCard} />
       </div>
     </div>
   )
 };
-
 export default Column;
 
 Column.propTypes = {
+  key:PropTypes.number,
   id: PropTypes.any,
   title: PropTypes.string.isRequired,
-  storage: PropTypes.object.isRequired,
-  saveTitle: PropTypes.func,
 };
 

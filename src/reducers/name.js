@@ -9,7 +9,6 @@ export function addName(name) {
 
 const initialstate = {
     name: 'Unknown user',
-    modalGreetingOpen: true,
 };
 
 export default function name(state = initialstate, action) {
@@ -17,7 +16,7 @@ export default function name(state = initialstate, action) {
         case ADD_NAME:
             let name = action.name;
             if (!name.trim()) { return state };
-            return { ...state, name, modalGreetingOpen: false, };
+            return { ...state, name,};
         default:
             return state;
     }

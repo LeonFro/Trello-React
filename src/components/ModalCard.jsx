@@ -2,6 +2,8 @@ import React from 'react';
 import Description from '../components/DescriptionInModal';
 import Comments from '../components/Comments';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
+import ReactModal from 'react-modal';
 
 export default class ModalCard extends React.Component {
     state = {
@@ -9,13 +11,17 @@ export default class ModalCard extends React.Component {
         isEditDescripton: false,
     };
 
+    componentWillMount() {
+        ReactModal.setAppElement('#root');
+    };
+    componentWillUnmount() {
+        window.removeEventListener("keyup", this.handleKeyUp, false);
+    };
     componentDidMount() {
         window.addEventListener("keyup", this.handleKeyUp, false);
     };
 
-    componentWillUnmount() {
-        window.removeEventListener("keyup", this.handleKeyUp, false);
-    };
+
 
     handleKeyUp = (e) => {
         const { onCloseRequest } = this.props;
@@ -60,75 +66,93 @@ export default class ModalCard extends React.Component {
     }
 
     render() {
-        const { description, id, idColumn, storage, title } = this.props;
+        const {
+            name,
+            description,
+            id,
+            idColumn,
+            listComments,
+            titleCard,
+            onClose,
+            deletThisComment,
+            thisEditComment,
+            handleAddText
+        } = this.props;
+        const { isEditTitle } = this.state;
         return (
-            <div className="modal">
-                <div className="modal-dialog" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header">
+            <ReactModal isOpen={this.props.onCloseRequest}>
+                <div className="modal">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
 
-                            {this.state.isEditTitle ? <div><input type="text" className="form-control"
-                                ref="title" defaultValue={title} />
-                                <button type="submit"
-                                    className="btn btn-primary"
-                                    onClick={this.editTitleCard}>Save</button></div> :
-                                <h5 className="modal-title"
-                                    onClick={() => this.setState({ isEditTitle: true })}>{title}</h5>}
+                                {isEditTitle ?
+                                    <div>
+                                        <input type="text" className="form-control"
+                                            ref="title" defaultValue={titleCard} />
+                                        <button type="submit"
+                                            className="btn btn-primary"
+                                            onClick={this.editTitleCard}>Save</button>
+                                    </div> :
+                                    <h5 className="modal-title"
+                                        onClick={() => this.setState({ isEditTitle: true })}>{titleCard}</h5>}
 
-                            <button type="button"
-                                className="close"
-                                data-dismiss="modal"
-                                aria-label="Close"
-                                onClick={this.props.onClose}>
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-
-                            <Description
-                                id={id}
-                                idColumn={idColumn}
-                                description={description}
-                                addText={this.props.handleAddText} />
-                            <hr />
-                            <div className="form-group">
-                                <label htmlFor="">Add comment</label>
-                                <textarea name="form-control"
-                                    className="form-control"
-                                    id="exampleFormControlTextarea1"
-                                    rows="3"
-                                    placeholder="Add comment"
-                                    ref="text"
-                                ></textarea>
-                                <button type="submit"
-                                    className="btn btn-primary"
-                                    onClick={this.addComment}>Save</button>
+                                <button type="button"
+                                    className="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                    onClick={onClose}>
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
+                            <div className="modal-body">
 
-                            {storage.card.comments.map((comm, i) =>
-                                comm.idCard === id ?
-                                    <Comments
-                                        comment={comm.comment}
-                                        key={i}
-                                        id={comm.id}
-                                        data={storage}
-                                        deletComment={this.props.deletThisComment}
-                                        isEditComment={this.props.thisEditComment} />
-                                    : null
-                            )}
+                                <Description
+                                    id={id}
+                                    idColumn={idColumn}
+                                    description={description}
+                                    addText={handleAddText} />
+                                <hr />
+                                <div className="form-group">
+                                    <label htmlFor="">Add comment</label>
+                                    <textarea name="form-control"
+                                        className="form-control"
+                                        id="exampleFormControlTextarea1"
+                                        rows="3"
+                                        placeholder="Add comment"
+                                        ref="text"
+                                    ></textarea>
+                                    <button type="submit"
+                                        className="btn btn-primary"
+                                        onClick={this.addComment}>Save</button>
+                                </div>
 
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button"
-                                className="btn btn-danger" onClick={this.deletCard}>Delete card</button>
+                                {listComments.map((comm, i) =>
+                                    comm.idCard === id ?
+                                        <Comments
+                                            comment={comm.comment}
+                                            key={i}
+                                            id={comm.id}
+                                            name={name}
+                                            deletComment={deletThisComment}
+                                            isEditComment={thisEditComment} />
+                                        : null
+                                )}
+
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button"
+                                    className="btn btn-danger" onClick={this.deletCard}>Delete card</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </ReactModal>
         );
     }
 };
 
+ReactDOM.render(<ModalCard />, document.getElementById('root'));
 ModalCard.propTypes = {
     handleKeyUp: PropTypes.func,
     addComment: PropTypes.func,
@@ -137,8 +161,8 @@ ModalCard.propTypes = {
     description: PropTypes.string,
     id: PropTypes.any,
     idColumn: PropTypes.string,
-    storage: PropTypes.object.isRequired,
-    title: PropTypes.string,
+    listComments: PropTypes.array.isRequired,
+    titleCard: PropTypes.string.isRequired,
     isEditTitle: PropTypes.bool,
     isEditDescripton: PropTypes.bool,
 };

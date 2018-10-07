@@ -18,9 +18,10 @@ export default class Description extends React.Component {
         this.props.addText(idCard, idColumn, valueTextArea);
     };
 
-    editDescription() {
+    render() {
+        const { isEditDescription } = this.state;
         const { description } = this.props;
-        return (<div>
+        return (isEditDescription ? <div>
             <textarea name="form-control"
                 className="form-control"
                 rows="3"
@@ -30,30 +31,17 @@ export default class Description extends React.Component {
             <button type="submit"
                 className="btn btn-warning pull-right"
                 onClick={this.saveText}>Save</button>
-        </div>)
-    };
-
-    noEdit() {
-        const { description } = this.props;
-        return (
+        </div> :
             <div onClick={() => this.setState({ isEditDescription: true })}>
                 <h5 className="modal-title">Description</h5>
                 <p>{description}</p>
-            </div>
-        )
-    };
-
-    render() {
-        return this.state.isEditDescription ? this.editDescription() : this.noEdit();
-
+            </div>)
     };
 };
 Description.propTypes = {
     saveText: PropTypes.func,
-    editDescription: PropTypes.func,
-    noEdit: PropTypes.func,
     isEditDescription: PropTypes.bool,
-    description: PropTypes.any,
+    description: PropTypes.string,
 };
 
 Description.defaultProps = {

@@ -77,9 +77,10 @@ float: right;
 .App-intro {
   font-size: large;
 }
- .modal{
+/* modal window */
+  .modal{
   display: block !important;
-} 
+}  
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

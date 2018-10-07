@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 export default class AddCard extends React.Component {
     state = {
-        isEdit: false,
+        cangeFormOnEdit: false,
     };
 
-    newCard = () => {
-        this.setState({ isEdit: false });
+    saveCard = () => {
+        this.setState({ cangeFormOnEdit: false });
         let newCard = this.refs.newCard.value;
         if (!newCard.trim()) {
             return;
@@ -16,39 +16,27 @@ export default class AddCard extends React.Component {
         this.props.addCard(idCard, newCard);
     };
 
-    editTitle() {
-        return (
-            <div className="row justify-content-md-center">
-                <div className="col-md-8">
-                    <input type="text" className="form-control"
-                        ref="newCard" /></div>
-                <button type="submit" className="btn btn-warning pull-right col-md-3"
-                    onClick={this.newCard}>Save</button>
+    render() {
+        const { cangeFormOnEdit } = this.state;
+        return (cangeFormOnEdit ? <div className="row justify-content-md-center">
+            <div className="col-md-8">
+                <input type="text" className="form-control"
+                    ref="newCard" />
             </div>
-        )
-    };
-
-    noEdit() {
-        return (
+            <button type="submit" className="btn btn-warning pull-right col-md-3"
+                onClick={this.saveCard}>Save</button>
+        </div> :
             <a className="add-card"
-                onClick={() => this.setState({ isEdit: true })}
+                onClick={() => this.setState({ cangeFormOnEdit: true })}
             >+ Add card
             </a>
-        )
-    };
-
-    render() {
-        return this.state.isEdit ? this.editTitle() : this.noEdit()
+        );
     };
 };
 
 AddCard.propTypes = {
-    newCard: PropTypes.func,
-    isEdit: PropTypes.bool,
-    editTitle: PropTypes.func,
-    noEdit: PropTypes.func,
-};
-AddCard.defaultProps = {
-    modalGreetingOpen: true,
-    modalCardOpen: false,
+    saveCard: PropTypes.func,
+    cangeFormOnEdit: PropTypes.bool,
+    idCard: PropTypes.number,
+    newCard: PropTypes.string,
 };

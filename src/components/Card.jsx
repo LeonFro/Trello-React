@@ -12,23 +12,39 @@ export default class Card extends React.Component {
     };
 
     render() {
-        const { data, storage, title, description, id, idColumn } = this.props;
-        let sumComments = storage.card.comments.filter(x => x.idCard === id).length;
+        const {
+            name,
+            id,
+            cardList,
+            titleCard,
+            idColumn,
+            listComments,
+        } = this.props;
+        let sumComments = listComments.filter(x => x.idCard === id).length;
         return (
             <div className="col border list-cards">
                 <div className="list-card-details">
-                    <span className="card-name">{title}</span>
-                    <button type="button" className="btn btn-secondary btn-sm" disabled><i className="far fa-comment-dots"></i>{sumComments}</button>
-                    <button type="button" className="btn btn-info btn-sm" onClick={this.toggleCardModal}><i className="fas fa-pencil-alt"></i></button>
+                    <span className="card-name">{titleCard}</span>
+                    <button type="button" className="btn btn-secondary btn-sm" disabled>
+                        <i className="far fa-comment-dots"></i>
+                        {sumComments}
+                    </button>
+                    <button type="button"
+                        data-toggle="modal"
+                        data-target="#largeModal"
+                        className="btn btn-info btn-sm"
+                        onClick={this.toggleCardModal}>
+                        <i className="fas fa-pencil-alt"></i>
+                    </button>
                 </div>
 
                 {this.state.modalCardOpen &&
                     <ModalCard
-                        storage={storage}
-                        description={description}
-                        title={title}
-                        data={data}
+                        name={name}
+                        description={cardList.description}
+                        titleCard={titleCard}
                         idColumn={idColumn}
+                        listComments={listComments}
                         id={this.props.id}
                         onClose={this.toggleCardModal}
                         onCloseRequest={() => this.toggleCardModal()}
@@ -39,7 +55,6 @@ export default class Card extends React.Component {
                         thisEditComment={this.props.commentEdit}
                         saveCardTitle={this.props.saveContextTitle} />
                 }
-
             </div>
         )
     }
@@ -47,12 +62,10 @@ export default class Card extends React.Component {
 
 Card.propTypes = {
     toggleCardModal: PropTypes.func,
-    data: PropTypes.object,
-    storage: PropTypes.object.isRequired,
+    cardList: PropTypes.object,
     description: PropTypes.string,
-    title: PropTypes.string.isRequired,
-    idColumn: PropTypes.any,
-    id: PropTypes.any,
+    titleCard: PropTypes.string.isRequired,
+    id: PropTypes.number,
     onClose: PropTypes.func,
     onCloseRequest: PropTypes.func,
     handleAddText: PropTypes.func,
@@ -67,5 +80,5 @@ Card.propTypes = {
 Card.defaultProps = {
     modalCardOpen: false,
     sumComments: 0,
-    title: "New card"
+    titleCard: "New card",
 };
