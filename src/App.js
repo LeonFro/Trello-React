@@ -7,6 +7,12 @@ import { bindActionCreators } from "redux";
 import { addName } from './reducers/name';
 import PropTypes from 'prop-types';
 import {
+  getName,
+  getCardsTitle,
+  getCardsComment,
+  getCard
+} from './selectors';
+import {
   addCard,
   deleteCard,
   changeTitleCard,
@@ -105,10 +111,10 @@ const App = ({
 
 const mapStateToProps = state => {
   return {
-    name: state.name.name,
-    listComments: state.card.comments,
-    cardList: state.card,
-    columnTitleList: state.column.nameColumn,
+    name: getName(state),
+    listComments: getCardsComment(state),
+    cardList: getCard(state),
+    columnTitleList: getCardsTitle(state),
   };
 };
 
