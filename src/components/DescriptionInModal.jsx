@@ -21,17 +21,18 @@ export default class Description extends React.Component {
     render() {
         const { isEditDescription } = this.state;
         const { description } = this.props;
-        return (isEditDescription ? <div>
-            <textarea name="form-control"
-                className="form-control"
-                rows="3"
-                ref="text"
-                defaultValue={description}>
-            </textarea>
-            <button type="submit"
-                className="btn btn-warning pull-right"
-                onClick={this.saveText}>Save</button>
-        </div> :
+        return (isEditDescription ?
+            <div>
+                <textarea name="form-control"
+                    className="form-control"
+                    rows="3"
+                    ref="text"
+                    defaultValue={description}>
+                </textarea>
+                <button type="submit"
+                    className="btn btn-warning pull-right"
+                    onClick={this.saveText}>Save</button>
+            </div> :
             <div onClick={() => this.setState({ isEditDescription: true })}>
                 <h5 className="modal-title">Description</h5>
                 <p>{description}</p>

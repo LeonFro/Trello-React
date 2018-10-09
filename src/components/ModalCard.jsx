@@ -2,7 +2,6 @@ import React from 'react';
 import Description from '../components/DescriptionInModal';
 import Comments from '../components/Comments';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import ReactModal from 'react-modal';
 
 export default class ModalCard extends React.Component {
@@ -11,17 +10,12 @@ export default class ModalCard extends React.Component {
         isEditDescripton: false,
     };
 
-    componentWillMount() {
-        ReactModal.setAppElement('#root');
-    };
     componentWillUnmount() {
         window.removeEventListener("keyup", this.handleKeyUp, false);
     };
     componentDidMount() {
         window.addEventListener("keyup", this.handleKeyUp, false);
     };
-
-
 
     handleKeyUp = (e) => {
         const { onCloseRequest } = this.props;
@@ -85,7 +79,6 @@ export default class ModalCard extends React.Component {
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-
                                 {isEditTitle ?
                                     <div>
                                         <input type="text" className="form-control"
@@ -152,7 +145,6 @@ export default class ModalCard extends React.Component {
     }
 };
 
-ReactDOM.render(<ModalCard />, document.getElementById('root'));
 ModalCard.propTypes = {
     handleKeyUp: PropTypes.func,
     addComment: PropTypes.func,

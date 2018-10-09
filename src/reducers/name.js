@@ -16,7 +16,7 @@ export default function name(state = initialstate, action) {
         case ADD_NAME:
             let name = action.name;
             if (!name.trim()) { return state };
-            return { ...state, name,};
+            return { ...state, name, };
         default:
             return state;
     }

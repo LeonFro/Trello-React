@@ -26,7 +26,7 @@ export const changeTitleCard = (idCard, nameColumn, textTitleCard) => ({
     idCard,
     nameColumn,
     textTitleCard,
-   
+
 });
 
 export const addDescriptions = (idCard, nameColumn, text) => ({
@@ -55,7 +55,7 @@ export const cangeComment = (idComment, textComment) => ({
 });
 
 const initialstate = {
-    
+
     todo: [
         {
             id: 4,
@@ -127,7 +127,7 @@ export default function card(state = initialstate, action) {
                 };
                 return x;
             });
-            return { ...state, [nameColumn]: newTitle};
+            return { ...state, [nameColumn]: newTitle };
 
         case ADD_DESCRIPTIONS:
             let nameCol = action.nameColumn;
@@ -144,7 +144,7 @@ export default function card(state = initialstate, action) {
                 idCard: action.idCard,
                 id: action.id,
                 comment: action.text,
-            }; 
+            };
             return {
                 ...state,
                 comments: state.comments.concat(comment)

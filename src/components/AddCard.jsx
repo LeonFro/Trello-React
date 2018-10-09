@@ -18,17 +18,18 @@ export default class AddCard extends React.Component {
 
     render() {
         const { cangeFormOnEdit } = this.state;
-        return (cangeFormOnEdit ? <div className="row justify-content-md-center">
-            <div className="col-md-8">
-                <input type="text" className="form-control"
-                    ref="newCard" />
-            </div>
-            <button type="submit" className="btn btn-warning pull-right col-md-3"
-                onClick={this.saveCard}>Save</button>
-        </div> :
-            <a className="add-card"
-                onClick={() => this.setState({ cangeFormOnEdit: true })}
-            >+ Add card
+        return (
+            cangeFormOnEdit ? <div className="row justify-content-md-center">
+                <div className="col-md-8">
+                    <input type="text" className="form-control"
+                        ref="newCard" />
+                </div>
+                <button type="submit" className="btn btn-warning pull-right col-md-3"
+                    onClick={this.saveCard}>Save</button>
+            </div> :
+                <a className="add-card"
+                    onClick={() => this.setState({ cangeFormOnEdit: true })}
+                >+ Add card
             </a>
         );
     };

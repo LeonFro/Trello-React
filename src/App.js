@@ -31,7 +31,7 @@ const App = ({
   addComment,
   deleteComment,
   cangeComment,
-  changeTitleCard,}) => {
+  changeTitleCard, }) => {
   return (
     <div>
 

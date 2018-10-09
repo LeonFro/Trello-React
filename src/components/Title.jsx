@@ -17,7 +17,7 @@ export default class Title extends React.Component {
     };
 
     render() {
-        const {title} = this.props;
+        const { title } = this.props;
         const { isEditFormTitle } = this.state;
         return (
             (isEditFormTitle) ?
@@ -36,8 +36,8 @@ export default class Title extends React.Component {
                     {title}
                 </h2>)
     };
-
 };
+
 Title.propTypes = {
     changeTitle: PropTypes.func,
     isEditFormTitle: PropTypes.bool,

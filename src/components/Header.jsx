@@ -11,6 +11,7 @@ const Header = (props) => {
 Header.propTypes = {
     name: PropTypes.string.isRequired,
 };
+
 Header.defaultProps = {
     name: "Annon"
 };

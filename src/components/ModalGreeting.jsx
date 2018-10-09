@@ -77,6 +77,5 @@ ReactDOM.render(<ModalGreeting />, document.getElementById('root'));
 
 ModalGreeting.propTypes = {
   setName: PropTypes.func.isRequired,
-
 };
 

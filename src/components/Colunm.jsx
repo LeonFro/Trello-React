@@ -57,7 +57,7 @@ const Column = ({
 export default Column;
 
 Column.propTypes = {
-  key:PropTypes.number,
+  key: PropTypes.number,
   id: PropTypes.any,
   title: PropTypes.string.isRequired,
 };
