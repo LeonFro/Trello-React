@@ -80,7 +80,11 @@ float: right;
 /* modal window */
   .modal{
   display: block !important;
-}  
+  position: unset !important;
+} 
+.titl{
+  border-bottom: 0px solid #e9ecef;
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

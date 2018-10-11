@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Card from './Card';
 import Title from './Title';
 import AddCard from './AddCard';
-import PropTypes from 'prop-types';
 
 const Column = ({
   name,
@@ -17,20 +17,22 @@ const Column = ({
   onEditComment,
   onSaveTitle,
   addNewCard,
-  listComments }) => {
-  return (
+  listComments,
+  commentSumm,
+}) => (
     <div className="col border border-info rounded">
       <div className="content">
         <div className="header">
 
-          <Title id={id}
+          <Title
+            id={id}
             title={title}
             saveTitle={newTitle}
           />
         </div>
         <hr />
 
-        {cardList.map((cards, i) =>
+        {cardList.map((cards, i) => (
           <Card
             idColumn={id}
             key={i}
@@ -45,15 +47,17 @@ const Column = ({
             deletComment={commentDelet}
             commentEdit={onEditComment}
             saveContextTitle={onSaveTitle}
-          />)}
+            commentSumm={commentSumm}
+          />
+        ))}
         <hr />
-
-        <AddCard id={id}
-          addCard={addNewCard} />
+        <AddCard
+          id={id}
+          addCard={addNewCard}
+        />
       </div>
     </div>
-  )
-};
+  );
 export default Column;
 
 Column.propTypes = {
@@ -61,4 +65,3 @@ Column.propTypes = {
   id: PropTypes.any,
   title: PropTypes.string.isRequired,
 };
-

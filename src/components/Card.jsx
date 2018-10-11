@@ -1,10 +1,10 @@
-import React from 'react';
-import ModalCard from '../components/ModalCard';
-import PropTypes from 'prop-types';
+import React from "react";
+import ModalCard from "../components/ModalCard";
+import PropTypes from "prop-types";
 
 export default class Card extends React.Component {
     state = {
-        modalCardOpen: false,
+        modalCardOpen: false
     };
 
     toggleCardModal = () => {
@@ -14,11 +14,11 @@ export default class Card extends React.Component {
     render() {
         const {
             name,
-            id,
             cardList,
             titleCard,
             idColumn,
             listComments,
+            id,
         } = this.props;
         let sumComments = listComments.filter(x => x.idCard === id).length;
         return (
@@ -26,19 +26,21 @@ export default class Card extends React.Component {
                 <div className="list-card-details">
                     <span className="card-name">{titleCard}</span>
                     <button type="button" className="btn btn-secondary btn-sm" disabled>
-                        <i className="far fa-comment-dots"></i>
+                        <i className="far fa-comment-dots" />
                         {sumComments}
                     </button>
-                    <button type="button"
+                    <button
+                        type="button"
                         data-toggle="modal"
                         data-target="#largeModal"
                         className="btn btn-info btn-sm"
-                        onClick={this.toggleCardModal}>
-                        <i className="fas fa-pencil-alt"></i>
+                        onClick={this.toggleCardModal}
+                    >
+                        <i className="fas fa-pencil-alt" />
                     </button>
                 </div>
 
-                {this.state.modalCardOpen &&
+                {this.state.modalCardOpen && (
                     <ModalCard
                         name={name}
                         description={cardList.description}
@@ -53,12 +55,13 @@ export default class Card extends React.Component {
                         addTextComment={this.props.addComment}
                         deletThisComment={this.props.deletComment}
                         thisEditComment={this.props.commentEdit}
-                        saveCardTitle={this.props.saveContextTitle} />
-                }
+                        saveCardTitle={this.props.saveContextTitle}
+                    />
+                )}
             </div>
-        )
+        );
     }
-};
+}
 
 Card.propTypes = {
     toggleCardModal: PropTypes.func,
@@ -75,10 +78,9 @@ Card.propTypes = {
     thisEditComment: PropTypes.func,
     sumComments: PropTypes.number.isRequired,
     saveContextTitle: PropTypes.func
-
 };
 Card.defaultProps = {
     modalCardOpen: false,
     sumComments: 0,
-    titleCard: "New card",
+    titleCard: "New card"
 };

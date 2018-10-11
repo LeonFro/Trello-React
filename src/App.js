@@ -1,16 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import ModalGreeting from './components/ModalGreeting';
 import Column from './components/Colunm';
 import Header from './components/Header';
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { addName } from './reducers/name';
-import PropTypes from 'prop-types';
 import {
   getName,
   getCardsTitle,
   getCardsComment,
-  getCard
+  getCard,
 } from './selectors';
 import {
   addCard,
@@ -19,10 +19,10 @@ import {
   addDescriptions,
   addComment,
   deleteComment,
-  cangeComment
+  cangeComment,
 } from './reducers/card';
 import { saveTitle } from './reducers/column';
-import './App.css'
+import './App.css';
 
 const App = ({
   name,
@@ -37,12 +37,13 @@ const App = ({
   addComment,
   deleteComment,
   cangeComment,
-  changeTitleCard, }) => {
-  return (
+  changeTitleCard,
+}) => (
     <div>
 
       <ModalGreeting
-        setName={addName} />
+        setName={addName}
+      />
       <Header name={name} />
 
       <div className="container">
@@ -60,7 +61,8 @@ const App = ({
             addNewComment={addComment}
             commentDelet={deleteComment}
             onEditComment={cangeComment}
-            onSaveTitle={changeTitleCard} />
+            onSaveTitle={changeTitleCard}
+          />
           <Column
             name={name}
             cardList={cardList.inProgress}
@@ -74,7 +76,8 @@ const App = ({
             addNewComment={addComment}
             commentDelet={deleteComment}
             onEditComment={cangeComment}
-            onSaveTitle={changeTitleCard} />
+            onSaveTitle={changeTitleCard}
+          />
           <Column
             name={name}
             cardList={cardList.test}
@@ -88,7 +91,8 @@ const App = ({
             addNewComment={addComment}
             commentDelet={deleteComment}
             onEditComment={cangeComment}
-            onSaveTitle={changeTitleCard} />
+            onSaveTitle={changeTitleCard}
+          />
           <Column
             name={name}
             cardList={cardList.done}
@@ -102,41 +106,37 @@ const App = ({
             addNewComment={addComment}
             commentDelet={deleteComment}
             onEditComment={cangeComment}
-            onSaveTitle={changeTitleCard} />
+            onSaveTitle={changeTitleCard}
+          />
         </div>
       </div>
     </div>
-  )
-};
-
-const mapStateToProps = state => {
-  return {
-    name: getName(state),
-    listComments: getCardsComment(state),
-    cardList: getCard(state),
-    columnTitleList: getCardsTitle(state),
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      addName,
-      addCard,
-      saveTitle,
-      deleteCard,
-      addDescriptions,
-      addComment,
-      deleteComment,
-      cangeComment,
-      changeTitleCard
-    },
-    dispatch
   );
-};
+
+const mapStateToProps = state => ({
+  name: getName(state),
+  listComments: getCardsComment(state),
+  cardList: getCard(state),
+  columnTitleList: getCardsTitle(state),
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    addName,
+    addCard,
+    saveTitle,
+    deleteCard,
+    addDescriptions,
+    addComment,
+    deleteComment,
+    cangeComment,
+    changeTitleCard,
+  },
+  dispatch,
+);
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(App);
 
 App.propTypes = {
@@ -155,5 +155,3 @@ App.propTypes = {
   name: PropTypes.string,
   listComments: PropTypes.array.isRequired,
 };
-
-
