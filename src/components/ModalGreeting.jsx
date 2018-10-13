@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import ReactDOM from "react-dom";
-import ReactModal from "react-modal";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { ModalWindow } from './Modal';
+import Modal from 'react-modal';
 
 export default class ModalGreeting extends React.Component {
   state = {
@@ -9,13 +9,13 @@ export default class ModalGreeting extends React.Component {
   };
 
   componentWillMount() {
-    ReactModal.setAppElement("#root");
+    Modal.setAppElement('body');
   }
   componentWillUnmount() {
-    window.removeEventListener("keyup", this.handleKeyUp, false);
+    window.removeEventListener('keyup', this.handleKeyUp, false);
   }
   componentDidMount() {
-    window.addEventListener("keyup", this.handleKeyUp, false);
+    window.addEventListener('keyup', this.handleKeyUp, false);
   }
 
   handleKeyUp = e => {
@@ -23,7 +23,7 @@ export default class ModalGreeting extends React.Component {
       13: () => {
         e.preventDefault();
         this.handleClick();
-        window.removeEventListener("keyup", this.handleKeyUp, false);
+        window.removeEventListener('keyup', this.handleKeyUp, false);
       }
     };
     if (keys[e.keyCode]) {
@@ -36,12 +36,12 @@ export default class ModalGreeting extends React.Component {
     let name = this.refs.name.value;
     setName(name);
     this.setState({ modalGreetingsIsOpen: false });
-    window.removeEventListener("keyup", this.handleKeyUp, false);
+    window.removeEventListener('keyup', this.handleKeyUp, false);
   };
 
   render() {
     return (
-      <ReactModal isOpen={this.state.modalGreetingsIsOpen} style={customStyles}>
+      <ModalWindow onClose={this.state.modalGreetingsIsOpen}>
         <div
           className="modal"
           id="exampleModal"
@@ -80,28 +80,13 @@ export default class ModalGreeting extends React.Component {
             </div>
           </div>
         </div>
-      </ReactModal>
+      </ModalWindow>
     );
   }
 }
 
-ReactDOM.render(<ModalGreeting />, document.getElementById("root"));
-
 ModalGreeting.propTypes = {
-  setName: PropTypes.func.isRequired
+  setName: PropTypes.func.isRequired,
+  modalGreetingsIsOpen: PropTypes.bool,
 };
 
-const customStyles = {
-  overlay: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(117, 117, 117, 0.75)"
-  },
-  content: {
-    border: 0,
-    background: "rgba(117, 117, 117, 0)"
-  }
-};

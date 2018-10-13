@@ -1,20 +1,23 @@
-import React from "react";
-import Description from "../components/DescriptionInModal";
-import Comments from "../components/Comments";
-import PropTypes from "prop-types";
-import ReactModal from "react-modal";
+import React from 'react';
+import Description from '../components/DescriptionInModal';
+import Comments from '../components/Comments';
+import PropTypes from 'prop-types';
+import { ModalWindow } from './Modal';
+import Modal from 'react-modal';
 
 export default class ModalCard extends React.Component {
   state = {
     isEditTitle: false,
     isEditDescripton: false
   };
-
+  componentWillMount() {
+    Modal.setAppElement('body');
+  }
   componentWillUnmount() {
-    window.removeEventListener("keyup", this.handleKeyUp, false);
+    window.removeEventListener('keyup', this.handleKeyUp, false);
   }
   componentDidMount() {
-    window.addEventListener("keyup", this.handleKeyUp, false);
+    window.addEventListener('keyup', this.handleKeyUp, false);
   }
 
   handleKeyUp = e => {
@@ -23,7 +26,7 @@ export default class ModalCard extends React.Component {
       27: () => {
         e.preventDefault();
         onCloseRequest();
-        window.removeEventListener("keyup", this.handleKeyUp, false);
+        window.removeEventListener('keyup', this.handleKeyUp, false);
       }
     };
     if (keys[e.keyCode]) {
@@ -38,7 +41,7 @@ export default class ModalCard extends React.Component {
       return;
     }
     this.props.addTextComment(idCard, valueTextArea);
-    this.refs.text.value = "";
+    this.refs.text.value = '';
   };
 
   deletCard = () => {
@@ -68,13 +71,13 @@ export default class ModalCard extends React.Component {
       listComments,
       titleCard,
       onClose,
-      deletThisComment,
+      delComment,
       thisEditComment,
       handleAddText
     } = this.props;
     const { isEditTitle } = this.state;
     return (
-      <ReactModal isOpen={this.props.onCloseRequest} style={customStyles}>
+      <ModalWindow onClose={this.props.onClose}>
         <div className="modal">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
@@ -149,7 +152,7 @@ export default class ModalCard extends React.Component {
                         key={i}
                         id={comm.id}
                         name={name}
-                        deletComment={deletThisComment}
+                        deleteComment={delComment}
                         isEditComment={thisEditComment}
                       />
                     ) : null
@@ -167,23 +170,23 @@ export default class ModalCard extends React.Component {
             </div>
           </div>
         </div>
-      </ReactModal>
+      </ModalWindow>
     );
   }
 }
 
 ModalCard.propTypes = {
-  handleKeyUp: PropTypes.func,
-  addComment: PropTypes.func,
-  deletCard: PropTypes.func,
-  editTitleCard: PropTypes.func,
-  description: PropTypes.string,
-  id: PropTypes.any,
-  idColumn: PropTypes.string,
+  onCloseRequest: PropTypes.func.isRequired,
+  addTextComment: PropTypes.func.isRequired,
+  deletThisCard: PropTypes.func.isRequired,
+  saveCardTitle: PropTypes.func.isRequired,
+  description: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  idColumn: PropTypes.string.isRequired,
   listComments: PropTypes.array.isRequired,
   titleCard: PropTypes.string.isRequired,
-  isEditTitle: PropTypes.bool,
-  isEditDescripton: PropTypes.bool
+  isEditTitle: PropTypes.bool.isRequired,
+  isEditDescripton: PropTypes.bool.isRequired
 };
 
 ModalCard.defaultProps = {
@@ -191,17 +194,3 @@ ModalCard.defaultProps = {
   isEditDescripton: false
 };
 
-const customStyles = {
-  overlay: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(117, 117, 117, 0.75)"
-  },
-  content: {
-    border: 0,
-    background: "rgba(117, 117, 117, 0)"
-  }
-};

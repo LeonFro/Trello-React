@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class Title extends React.Component {
   state = {
@@ -49,5 +49,5 @@ Title.propTypes = {
   title: PropTypes.string.isRequired
 };
 Title.defaultProps = {
-  title: "Title column"
+  title: 'Title column'
 };

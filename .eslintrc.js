@@ -11,6 +11,7 @@ module.exports = {
         },
         "ecmaVersion": 2018
     },
+    "parser": "babel-eslint",
     "plugins": [
         "react"
     ],

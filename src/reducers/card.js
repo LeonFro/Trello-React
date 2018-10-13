@@ -11,45 +11,45 @@ export const addCard = (idCard, newCard) => ({
   idCard,
   newCard,
   id: Date.now(),
-  description: '',
+  description: ''
 });
 
 export const deleteCard = (idCard, nameColumn) => ({
   type: DELETE_CARD,
   idCard,
-  nameColumn,
+  nameColumn
 });
 
 export const changeTitleCard = (idCard, nameColumn, textTitleCard) => ({
   type: CHANGE_TITLE_CARD,
   idCard,
   nameColumn,
-  textTitleCard,
+  textTitleCard
 });
 
 export const addDescriptions = (idCard, nameColumn, text) => ({
   type: ADD_DESCRIPTIONS,
   idCard,
   nameColumn,
-  text,
+  text
 });
 
 export const addComment = (idCard, text) => ({
   type: ADD_COMMENT,
   idCard,
   text,
-  id: Date.now(),
+  id: Date.now()
 });
 
 export const deleteComment = idComment => ({
   type: DELETE_COMMENT,
-  idComment,
+  idComment
 });
 
 export const cangeComment = (idComment, textComment) => ({
   type: CHANGE_COMMENT,
   idComment,
-  textComment,
+  textComment
 });
 
 const initialstate = {
@@ -57,113 +57,118 @@ const initialstate = {
     {
       id: 4,
       title: 'Buy milk',
-      description: '2 Gallons of milk',
+      description: '2 Gallons of milk'
     },
     {
       id: 5,
       title: 'Buy brod',
-      description: '2 bar Brod',
-    },
+      description: '2 bar Brod'
+    }
   ],
   inProgress: [
     {
       id: 6,
       title: 'Clean House',
-      description: 'Soap wash and polish floor',
-    },
+      description: 'Soap wash and polish floor'
+    }
   ],
   test: [
     {
       id: 7,
       title: 'Practice Meditation',
-      description: 'Use Headspace app',
-    },
+      description: 'Use Headspace app'
+    }
   ],
   done: [{}],
   comments: [
     {
       idCard: 4,
       id: 8,
-      comment: 'Well Well Well',
+      comment: 'Well Well Well'
     },
     {
       idCard: 7,
       id: 9,
-      comment: 'Very good!',
-    },
-  ],
+      comment: 'Very good!'
+    }
+  ]
 };
 
-export default function card(state = initialstate, action) {
+export default function cards (state = initialstate, action) {
   switch (action.type) {
-    case ADD_CARD:
-      const siries = action.idCard;
-      const card = {
-        id: action.id,
-        title: action.newCard,
-        description: action.description,
-      };
-      return {
-        ...state,
-        [siries]: state[siries].concat(card),
-      };
+  case ADD_CARD: {
+    const siries = action.idCard;
+    const card = {
+      id: action.id,
+      title: action.newCard,
+      description: action.description
+    };
+    return {
+      ...state,
+      [siries]: state[siries].concat(card)
+    };
+  }
 
-    case DELETE_CARD:
-      const columnName = action.nameColumn;
-      return {
-        ...state,
-        [columnName]: state[columnName].filter(
-          note => note.id !== action.idCard,
-        ),
-      };
+  case DELETE_CARD: {
+    const columnName = action.nameColumn;
+    return {
+      ...state,
+      [columnName]: state[columnName].filter(
+        note => note.id !== action.idCard
+      )
+    };
+  }
 
-    case CHANGE_TITLE_CARD:
-      const nameColumn = action.nameColumn;
-      const newTitle = state[nameColumn].map((x) => {
-        if (x.id === action.idCard) {
-          x.title = action.textTitleCard;
-        }
-        return x;
-      });
-      return { ...state, [nameColumn]: newTitle };
+  case CHANGE_TITLE_CARD: {
+    const nameColumn = action.nameColumn;
+    const newTitle = state[nameColumn].map(x => {
+      if (x.id === action.idCard) {
+        x.title = action.textTitleCard;
+      }
+      return x;
+    });
+    return { ...state, [nameColumn]: newTitle };
+  }
 
-    case ADD_DESCRIPTIONS:
-      const nameCol = action.nameColumn;
-      const newDesc = state[nameCol].map((data) => {
-        if (data.id === action.idCard) {
-          data.description = action.text;
-        }
-        return data;
-      });
-      return { ...state, [nameCol]: newDesc };
+  case ADD_DESCRIPTIONS: {
+    const nameCol = action.nameColumn;
+    const newDesc = state[nameCol].map(data => {
+      if (data.id === action.idCard) {
+        data.description = action.text;
+      }
+      return data;
+    });
+    return { ...state, [nameCol]: newDesc };
+  }
+  case ADD_COMMENT: {
+    const comment = {
+      idCard: action.idCard,
+      id: action.id,
+      comment: action.text
+    };
+    return {
+      ...state,
+      comments: state.comments.concat(comment)
+    };
+  }
 
-    case ADD_COMMENT:
-      const comment = {
-        idCard: action.idCard,
-        id: action.id,
-        comment: action.text,
-      };
-      return {
-        ...state,
-        comments: state.comments.concat(comment),
-      };
+  case DELETE_COMMENT:
+    return {
+      ...state,
+      comments: state.comments.filter(note => note.id !== action.idComment)
+    };
 
-    case DELETE_COMMENT:
-      return {
-        ...state,
-        comments: state.comments.filter(note => note.id !== action.idComment),
-      };
+  case CHANGE_COMMENT: {
+    const newComment = state.comments.map(x => {
+      if (x.id === action.idComment) {
+        x.comment = action.textComment;
+      }
+      return x;
+    });
+    return { ...state, comments: newComment };
+  }
 
-    case CHANGE_COMMENT:
-      const newComment = state.comments.map((x) => {
-        if (x.id === action.idComment) {
-          x.comment = action.textComment;
-        }
-        return x;
-      });
-      return { ...state, comments: newComment };
-
-    default:
-      return state;
+  default:
+    return state;
   }
 }

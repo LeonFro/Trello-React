@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class AddCard extends React.Component {
   state = {
@@ -32,19 +32,17 @@ export default class AddCard extends React.Component {
         </button>
       </div>
     ) : (
-        <a
-          className="add-card"
-          onClick={() => this.setState({ cangeFormOnEdit: true })}
-        >
-          + Add card
+      <a
+        className="add-card"
+        onClick={() => this.setState({ cangeFormOnEdit: true })}
+      >
+        + Add card
       </a>
-      );
+    );
   }
 }
 
 AddCard.propTypes = {
-  saveCard: PropTypes.func,
+  addCard: PropTypes.func.isRequired,
   cangeFormOnEdit: PropTypes.bool,
-  idCard: PropTypes.number,
-  newCard: PropTypes.string
 };

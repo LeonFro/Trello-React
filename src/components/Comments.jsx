@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class Comments extends React.Component {
   state = {
@@ -8,7 +8,7 @@ export default class Comments extends React.Component {
 
   removeComment = () => {
     let idComment = this.props.id;
-    this.props.deletComment(idComment);
+    this.props.deleteComment(idComment);
   };
 
   editComment = () => {
@@ -44,32 +44,33 @@ export default class Comments extends React.Component {
             </button>
           </div>
         ) : (
-            <div>
-              <div className="text-comment">{comment}</div>
-              <a className="badge badge-danger" onClick={this.removeComment}>
+          <div>
+            <div className="text-comment">{comment}</div>
+            <a className="badge badge-danger" onClick={this.removeComment}>
                 Delete
             </a>
-              <a
-                className="badge badge-success"
-                onClick={() => this.setState({ changeFormComment: true })}
-              >
+            <a
+              className="badge badge-success"
+              onClick={() => this.setState({ changeFormComment: true })}
+            >
                 Edit
             </a>
-            </div>
-          )}
+          </div>
+        )}
       </div>
     );
   }
 }
+
 Comments.propTypes = {
-  removeComment: PropTypes.func,
-  editComment: PropTypes.func,
+  deleteComment: PropTypes.func.isRequired,
+  isEditComment: PropTypes.func.isRequired,
   changeFormComment: PropTypes.bool.isRequired,
-  comment: PropTypes.string,
-  name: PropTypes.string.isRequired
+  comment: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 Comments.defaultProps = {
   changeFormComment: false,
-  comment: "text comment",
-  name: "Annon"
+  comment: 'text comment',
+  name: 'Annon'
 };

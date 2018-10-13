@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class Description extends React.Component {
   state = {
     isEditDescription: false,
-    description: ""
+    description: '',
   };
 
   saveText = () => {
@@ -39,20 +39,20 @@ export default class Description extends React.Component {
         </button>
       </div>
     ) : (
-        <div onClick={() => this.setState({ isEditDescription: true })}>
-          <h5 className="modal-title">Description</h5>
-          <p>{description}</p>
-        </div>
-      );
+      <div onClick={() => this.setState({ isEditDescription: true })}>
+        <h5 className="modal-title">Description</h5>
+        <p>{description}</p>
+      </div>
+    );
   }
 }
 Description.propTypes = {
   saveText: PropTypes.func,
   isEditDescription: PropTypes.bool,
-  description: PropTypes.string
+  description: PropTypes.string.isRequired,
 };
 
 Description.defaultProps = {
   isEditDescription: false,
-  description: "text description"
+  description: 'text description'
 };

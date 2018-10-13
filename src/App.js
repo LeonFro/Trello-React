@@ -8,9 +8,9 @@ import Header from './components/Header';
 import { addName } from './reducers/name';
 import {
   getName,
-  getCardsTitle,
-  getCardsComment,
-  getCard,
+  getCardsComments,
+  getCards,
+  getColumnNames,
 } from './selectors';
 import {
   addCard,
@@ -28,7 +28,6 @@ const App = ({
   name,
   addName,
   cardList,
-  columnTitleList,
   listComments,
   addCard,
   saveTitle,
@@ -38,86 +37,44 @@ const App = ({
   deleteComment,
   cangeComment,
   changeTitleCard,
+  columnlist
 }) => (
-    <div>
+  <div>
 
-      <ModalGreeting
-        setName={addName}
-      />
-      <Header name={name} />
+    <ModalGreeting
+      setName={addName}
+    />
+    <Header name={name} />
 
-      <div className="container">
-        <div className="row justify-content-center">
+    <div className="container">
+      <div className="row justify-content-center">
+        {columnlist.map((column) => (
           <Column
+            key={column.id}
             name={name}
-            cardList={cardList.todo}
-            id="todo"
-            title={columnTitleList[0].name}
+            cardList={cardList}
+            id={column.id}
+            title={column.name}
             listComments={listComments}
             addNewCard={addCard}
             newTitle={saveTitle}
             deletCard={deleteCard}
             addText={addDescriptions}
             addNewComment={addComment}
-            commentDelet={deleteComment}
+            deletCom={deleteComment}
             onEditComment={cangeComment}
             onSaveTitle={changeTitleCard}
-          />
-          <Column
-            name={name}
-            cardList={cardList.inProgress}
-            id="inProgress"
-            title={columnTitleList[1].name}
-            listComments={listComments}
-            addNewCard={addCard}
-            newTitle={saveTitle}
-            deletCard={deleteCard}
-            addText={addDescriptions}
-            addNewComment={addComment}
-            commentDelet={deleteComment}
-            onEditComment={cangeComment}
-            onSaveTitle={changeTitleCard}
-          />
-          <Column
-            name={name}
-            cardList={cardList.test}
-            id="test"
-            title={columnTitleList[2].name}
-            listComments={listComments}
-            addNewCard={addCard}
-            newTitle={saveTitle}
-            deletCard={deleteCard}
-            addText={addDescriptions}
-            addNewComment={addComment}
-            commentDelet={deleteComment}
-            onEditComment={cangeComment}
-            onSaveTitle={changeTitleCard}
-          />
-          <Column
-            name={name}
-            cardList={cardList.done}
-            id="done"
-            title={columnTitleList[3].name}
-            listComments={listComments}
-            addNewCard={addCard}
-            newTitle={saveTitle}
-            deletCard={deleteCard}
-            addText={addDescriptions}
-            addNewComment={addComment}
-            commentDelet={deleteComment}
-            onEditComment={cangeComment}
-            onSaveTitle={changeTitleCard}
-          />
-        </div>
+          />))}
       </div>
     </div>
-  );
+  </div>
+);
 
 const mapStateToProps = state => ({
   name: getName(state),
-  listComments: getCardsComment(state),
-  cardList: getCard(state),
-  columnTitleList: getCardsTitle(state),
+  listComments: getCardsComments(state),
+  cardList: getCards(state),
+  columnlist:getColumnNames(state),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
@@ -151,7 +108,6 @@ App.propTypes = {
   changeTitleCard: PropTypes.func.isRequired,
   id: PropTypes.string,
   cardList: PropTypes.object.isRequired,
-  columnTitleList: PropTypes.array.isRequired,
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
   listComments: PropTypes.array.isRequired,
 };
