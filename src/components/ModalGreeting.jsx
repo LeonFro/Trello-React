@@ -1,34 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ModalWindow } from './Modal';
-import Modal from 'react-modal';
+import ModalWindow from './Modal';
 
 export default class ModalGreeting extends React.Component {
   state = {
     modalGreetingsIsOpen: true
-  };
-
-  componentWillMount() {
-    Modal.setAppElement('body');
-  }
-  componentWillUnmount() {
-    window.removeEventListener('keyup', this.handleKeyUp, false);
-  }
-  componentDidMount() {
-    window.addEventListener('keyup', this.handleKeyUp, false);
-  }
-
-  handleKeyUp = e => {
-    const keys = {
-      13: () => {
-        e.preventDefault();
-        this.handleClick();
-        window.removeEventListener('keyup', this.handleKeyUp, false);
-      }
-    };
-    if (keys[e.keyCode]) {
-      keys[e.keyCode]();
-    }
   };
 
   handleClick = () => {
@@ -41,7 +17,7 @@ export default class ModalGreeting extends React.Component {
 
   render() {
     return (
-      <ModalWindow onClose={this.state.modalGreetingsIsOpen}>
+      <ModalWindow onClose={this.state.modalGreetingsIsOpen} handleClick={()=>this.handleClick()}>
         <div
           className="modal"
           id="exampleModal"
@@ -88,5 +64,7 @@ export default class ModalGreeting extends React.Component {
 ModalGreeting.propTypes = {
   setName: PropTypes.func.isRequired,
   modalGreetingsIsOpen: PropTypes.bool,
+  name: PropTypes.string,
+  handleClick: PropTypes.func,
 };
 

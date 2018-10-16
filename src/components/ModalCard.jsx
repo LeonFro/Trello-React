@@ -2,45 +2,21 @@ import React from 'react';
 import Description from '../components/DescriptionInModal';
 import Comments from '../components/Comments';
 import PropTypes from 'prop-types';
-import { ModalWindow } from './Modal';
-import Modal from 'react-modal';
+import ModalWindow from './Modal';
 
 export default class ModalCard extends React.Component {
   state = {
     isEditTitle: false,
     isEditDescripton: false
   };
-  componentWillMount() {
-    Modal.setAppElement('body');
-  }
-  componentWillUnmount() {
-    window.removeEventListener('keyup', this.handleKeyUp, false);
-  }
-  componentDidMount() {
-    window.addEventListener('keyup', this.handleKeyUp, false);
-  }
-
-  handleKeyUp = e => {
-    const { onCloseRequest } = this.props;
-    const keys = {
-      27: () => {
-        e.preventDefault();
-        onCloseRequest();
-        window.removeEventListener('keyup', this.handleKeyUp, false);
-      }
-    };
-    if (keys[e.keyCode]) {
-      keys[e.keyCode]();
-    }
-  };
-
+  
   addComment = () => {
     let valueTextArea = this.refs.text.value;
     let idCard = this.props.id;
     if (!valueTextArea.trim()) {
       return;
     }
-    this.props.addTextComment(idCard, valueTextArea);
+    this.props.onAddComment(idCard, valueTextArea);
     this.refs.text.value = '';
   };
 
@@ -48,9 +24,9 @@ export default class ModalCard extends React.Component {
     this.props.onCloseRequest();
     let idCard = this.props.id;
     let idColumn = this.props.idColumn;
-    this.props.deletThisCard(idCard, idColumn);
+    this.props.onDeletCard(idCard, idColumn);
   };
-
+  
   editTitleCard = () => {
     this.setState({ isEditTitle: false });
     let valueTextTitle = this.refs.title.value;
@@ -59,7 +35,7 @@ export default class ModalCard extends React.Component {
     }
     let idCard = this.props.id;
     let idColumn = this.props.idColumn;
-    this.props.saveCardTitle(idCard, idColumn, valueTextTitle);
+    this.props.onEditTitleCard(idCard, idColumn, valueTextTitle);
   };
 
   render() {
@@ -71,13 +47,14 @@ export default class ModalCard extends React.Component {
       listComments,
       titleCard,
       onClose,
-      delComment,
-      thisEditComment,
-      handleAddText
+      deletComment,
+      onEditComment,
+      addDescription,
+      onCloseRequest
     } = this.props;
     const { isEditTitle } = this.state;
     return (
-      <ModalWindow onClose={this.props.onClose}>
+      <ModalWindow onClose={onClose} onCloseRequest={onCloseRequest}>
         <div className="modal">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
@@ -122,7 +99,7 @@ export default class ModalCard extends React.Component {
                   id={id}
                   idColumn={idColumn}
                   description={description}
-                  addText={handleAddText}
+                  addDescription={addDescription}
                 />
                 <hr />
                 <div className="form-group">
@@ -152,8 +129,8 @@ export default class ModalCard extends React.Component {
                         key={i}
                         id={comm.id}
                         name={name}
-                        deleteComment={delComment}
-                        isEditComment={thisEditComment}
+                        deletComment={deletComment}
+                        onEditComment={onEditComment}
                       />
                     ) : null
                 )}
@@ -176,21 +153,26 @@ export default class ModalCard extends React.Component {
 }
 
 ModalCard.propTypes = {
-  onCloseRequest: PropTypes.func.isRequired,
-  addTextComment: PropTypes.func.isRequired,
-  deletThisCard: PropTypes.func.isRequired,
-  saveCardTitle: PropTypes.func.isRequired,
-  description: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  addComment: PropTypes.func,
+  id: PropTypes.number,
+  onAddComment: PropTypes.func.isRequired,
+  idCard:PropTypes.number,
+  valueTextArea:PropTypes.string,
+  deletCard:PropTypes.func,
+  onDeletCard: PropTypes.func.isRequired,
   idColumn: PropTypes.string.isRequired,
+  editTitleCard:PropTypes.func,
+  onEditTitleCard: PropTypes.func.isRequired,
+  valueTextTitle:PropTypes.string,
+  name:PropTypes.string.isRequired,
   listComments: PropTypes.array.isRequired,
   titleCard: PropTypes.string.isRequired,
-  isEditTitle: PropTypes.bool.isRequired,
-  isEditDescripton: PropTypes.bool.isRequired
+  onClose: PropTypes.func,
+  deletComment:PropTypes.func.isRequired,
+  onEditComment:PropTypes.func.isRequired,
+  addDescription:PropTypes.func.isRequired,
+  onCloseRequest: PropTypes.func.isRequired, 
+  description: PropTypes.string,
 };
 
-ModalCard.defaultProps = {
-  isEditTitle: false,
-  isEditDescripton: false
-};
 

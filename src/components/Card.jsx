@@ -9,6 +9,7 @@ export default class Card extends React.Component {
 
   toggleCardModal = () => {
     this.setState(state => ({ modalCardOpen: !state.modalCardOpen }));
+    window.removeEventListener('keyup', this.handleKeyUp, false);
   };
 
   render() {
@@ -19,12 +20,12 @@ export default class Card extends React.Component {
       idColumn,
       listComments,
       id,
-      addTextDescription,
-      cardRemove,
-      addComment,
+      addDescription,
+      onDeletCard,
+      onAddComment,
       deletComment,
-      commentEdit,
-      saveContextTitle
+      onEditComment,
+      onEditTitleCard
     } = this.props;
     const{
       modalCardOpen
@@ -60,12 +61,12 @@ export default class Card extends React.Component {
             id={this.props.id}
             onClose={this.toggleCardModal}
             onCloseRequest={() => this.toggleCardModal()}
-            handleAddText={addTextDescription}
-            deletThisCard={cardRemove}
-            addTextComment={addComment}
-            delComment={deletComment}
-            thisEditComment={commentEdit}
-            saveCardTitle={saveContextTitle}
+            addDescription={addDescription}
+            onDeletCard={onDeletCard}
+            onAddComment={onAddComment}
+            deletComment={deletComment}
+            onEditComment={onEditComment}
+            onEditTitleCard={onEditTitleCard}
           />
         )}
       </div>
@@ -74,22 +75,26 @@ export default class Card extends React.Component {
 }
 
 Card.propTypes = {
-  cardList: PropTypes.object,
-  description: PropTypes.string,
+  toggleCardModal: PropTypes.func,
+  listComments: PropTypes.array.isRequired,
+  name:PropTypes.string.isRequired,
+  cardList: PropTypes.object.isRequired,
   titleCard: PropTypes.string.isRequired,
+  idColumn: PropTypes.string.isRequired,
   id: PropTypes.number,
+  addDescription: PropTypes.func.isRequired,
+  onDeletCard: PropTypes.func.isRequired,
+  onAddComment: PropTypes.func.isRequired,
+  deletComment: PropTypes.func.isRequired,
+  onEditComment: PropTypes.func.isRequired,
+  onEditTitleCard: PropTypes.func.isRequired,
+  description: PropTypes.string,
   onClose: PropTypes.func,
-  onCloseRequest: PropTypes.func,
-  handleAddText: PropTypes.func,
-  deletThisCard: PropTypes.func,
-  addTextComment: PropTypes.func,
-  deletThisComment: PropTypes.func,
-  thisEditComment: PropTypes.func,
   sumComments: PropTypes.number.isRequired,
-  saveContextTitle: PropTypes.func
+  onCloseRequest: PropTypes.func,
 };
+
 Card.defaultProps = {
-  modalCardOpen: false,
   sumComments: 0,
   titleCard: 'New card'
 };

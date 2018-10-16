@@ -1,6 +1,6 @@
 export const SAVE_TITLE = 'SAVE_TITLE';
 
-export const saveTitle = (idCard, title) => ({
+export const saveTitleColumn = (idCard, title) => ({
   type: SAVE_TITLE,
   idCard,
   title,

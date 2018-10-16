@@ -13,7 +13,7 @@ export default class Title extends React.Component {
       return;
     }
     let titleId = this.props.id;
-    this.props.saveTitle(titleId, newTitle);
+    this.props.saveTitleColumn(titleId, newTitle);
   };
 
   render() {
@@ -44,9 +44,13 @@ export default class Title extends React.Component {
   }
 }
 Title.propTypes = {
+  id:PropTypes.string.isRequired,
   changeTitle: PropTypes.func,
+  saveTitleColumn: PropTypes.func.isRequired,
   isEditFormTitle: PropTypes.bool,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  titleId:PropTypes.string,
+  newTitle:PropTypes.string,
 };
 Title.defaultProps = {
   title: 'Title column'

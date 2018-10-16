@@ -9,16 +9,15 @@ const Column = ({
   cardList,
   title,
   id,
-  newTitle,
-  addText,
-  deletCard,
-  addNewComment,
-  deletCom,
+  saveTitleColumn,
+  addDescription,
+  onDeletCard,
+  onAddComment,
+  deletComment,
   onEditComment,
-  onSaveTitle,
-  addNewCard,
+  onEditTitleCard,
+  addCard,
   listComments,
-  commentSumm,
 }) => (
   <div className="col border border-info rounded">
     <div className="content">
@@ -27,7 +26,7 @@ const Column = ({
         <Title
           id={id}
           title={title}
-          saveTitle={newTitle}
+          saveTitleColumn={saveTitleColumn}
         />
       </div>
       <hr />
@@ -41,19 +40,18 @@ const Column = ({
           cardList={cards}
           titleCard={cards.title}
           listComments={listComments}
-          addTextDescription={addText}
-          cardRemove={deletCard}
-          addComment={addNewComment}
-          deletComment={deletCom}
-          commentEdit={onEditComment}
-          saveContextTitle={onSaveTitle}
-          commentSumm={commentSumm}
+          addDescription={addDescription}
+          onDeletCard={onDeletCard}
+          onAddComment={onAddComment}
+          deletComment={deletComment}
+          onEditComment={onEditComment}
+          onEditTitleCard={onEditTitleCard}
         />
       ))} 
       <hr />
       <AddCard
         id={id}
-        addCard={addNewCard}
+        addCard={addCard}
       />
     </div>
   </div>
@@ -63,4 +61,23 @@ export default Column;
 Column.propTypes = {
   id: PropTypes.any,
   title: PropTypes.string.isRequired,
+  saveTitleColumn: PropTypes.func.isRequired,
+  cardList: PropTypes.object.isRequired,
+  name:PropTypes.string.isRequired,
+  addDescription: PropTypes.func.isRequired,
+  onDeletCard: PropTypes.func.isRequired,
+  onAddComment: PropTypes.func.isRequired,
+  deletComment: PropTypes.func.isRequired,
+  onEditComment: PropTypes.func.isRequired,
+  onEditTitleCard: PropTypes.func.isRequired,
+  addCard:PropTypes.func.isRequired,
+  listComments: PropTypes.array.isRequired,
 };
+
+
+
+
+
+
+
+

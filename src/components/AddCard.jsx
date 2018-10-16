@@ -44,5 +44,5 @@ export default class AddCard extends React.Component {
 
 AddCard.propTypes = {
   addCard: PropTypes.func.isRequired,
-  cangeFormOnEdit: PropTypes.bool,
+  id: PropTypes.string.isRequired,
 };

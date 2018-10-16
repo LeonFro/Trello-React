@@ -15,7 +15,7 @@ export default class Description extends React.Component {
     }
     let idCard = this.props.id;
     let idColumn = this.props.idColumn;
-    this.props.addText(idCard, idColumn, valueTextArea);
+    this.props.addDescription(idCard, idColumn, valueTextArea);
   };
 
   render() {
@@ -47,12 +47,15 @@ export default class Description extends React.Component {
   }
 }
 Description.propTypes = {
-  saveText: PropTypes.func,
+  id: PropTypes.number,
+  idColumn: PropTypes.string.isRequired,
+  addDescription: PropTypes.func.isRequired,
   isEditDescription: PropTypes.bool,
+  valueTextArea: PropTypes.string,
+  idCard: PropTypes.number,
   description: PropTypes.string.isRequired,
 };
 
 Description.defaultProps = {
-  isEditDescription: false,
   description: 'text description'
 };

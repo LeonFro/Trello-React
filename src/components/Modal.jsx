@@ -1,14 +1,56 @@
 import React from 'react';
 import ReactModal from 'react-modal';
- 
-export function ModalWindow(props){
+import PropTypes from 'prop-types';
 
-  return (
-    <ReactModal isOpen={props.onClose} style={customStyles}>
-      {props.children}
-    </ReactModal>
-  );
+export default class ModalWindow extends React.Component{
+
+  componentWillMount() {
+    ReactModal.setAppElement('body');
+  }
+  componentWillUnmount() {
+    window.removeEventListener('keyup', this.handleKeyUp, false);
+  }
+  componentDidMount() {
+    window.addEventListener('keyup', this.handleKeyUp, false);
+  }
+
+  handleKeyUp = e => {
+    const keys = {
+      27: () => {
+        e.preventDefault();
+        this.props.onCloseRequest();
+        window.removeEventListener('keyup', this.handleKeyUp, false);
+      },
+      13: () => {
+        e.preventDefault();
+        this.props.handleClick();
+        window.removeEventListener('keyup', this.handleKeyUp, false);
+      }
+    };
+    if (keys[e.keyCode]) {
+      keys[e.keyCode]();
+    }
+  };
+  
+  render(){
+    const { 
+      onClose,
+      children,  
+    } =this.props;
+    return (
+      <ReactModal 
+        isOpen={onClose} 
+        style={customStyles}>
+        {children}
+      </ReactModal>
+    );
+  }
 }
+
+ModalWindow.propTypes = {
+  children: PropTypes.node.isRequired,
+  customStyles: PropTypes.any,
+};
 
 const customStyles = {
   overlay: {

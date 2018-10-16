@@ -2,9 +2,7 @@ export const ADD_CARD = 'ADD_CARD';
 export const DELETE_CARD = 'DELETE_CARD';
 export const CHANGE_TITLE_CARD = 'CHANGE_TITLE_CARD';
 export const ADD_DESCRIPTIONS = 'ADD_DESCRIPTIONS';
-export const ADD_COMMENT = 'ADD_COMMENT';
-export const DELETE_COMMENT = 'DELETE_COMMENT';
-export const CHANGE_COMMENT = 'CHANGE_COMMENT';
+
 
 export const addCard = (idCard, newCard) => ({
   type: ADD_CARD,
@@ -32,24 +30,6 @@ export const addDescriptions = (idCard, nameColumn, text) => ({
   idCard,
   nameColumn,
   text
-});
-
-export const addComment = (idCard, text) => ({
-  type: ADD_COMMENT,
-  idCard,
-  text,
-  id: Date.now()
-});
-
-export const deleteComment = idComment => ({
-  type: DELETE_COMMENT,
-  idComment
-});
-
-export const cangeComment = (idComment, textComment) => ({
-  type: CHANGE_COMMENT,
-  idComment,
-  textComment
 });
 
 const initialstate = {
@@ -80,18 +60,6 @@ const initialstate = {
     }
   ],
   done: [{}],
-  comments: [
-    {
-      idCard: 4,
-      id: 8,
-      comment: 'Well Well Well'
-    },
-    {
-      idCard: 7,
-      id: 9,
-      comment: 'Very good!'
-    }
-  ]
 };
 
 export default function cards (state = initialstate, action) {
@@ -140,34 +108,7 @@ export default function cards (state = initialstate, action) {
     });
     return { ...state, [nameCol]: newDesc };
   }
-  case ADD_COMMENT: {
-    const comment = {
-      idCard: action.idCard,
-      id: action.id,
-      comment: action.text
-    };
-    return {
-      ...state,
-      comments: state.comments.concat(comment)
-    };
-  }
-
-  case DELETE_COMMENT:
-    return {
-      ...state,
-      comments: state.comments.filter(note => note.id !== action.idComment)
-    };
-
-  case CHANGE_COMMENT: {
-    const newComment = state.comments.map(x => {
-      if (x.id === action.idComment) {
-        x.comment = action.textComment;
-      }
-      return x;
-    });
-    return { ...state, comments: newComment };
-  }
-
+  
   default:
     return state;
   }

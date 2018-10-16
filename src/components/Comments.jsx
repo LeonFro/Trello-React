@@ -8,7 +8,7 @@ export default class Comments extends React.Component {
 
   removeComment = () => {
     let idComment = this.props.id;
-    this.props.deleteComment(idComment);
+    this.props.deletComment(idComment);
   };
 
   editComment = () => {
@@ -18,7 +18,7 @@ export default class Comments extends React.Component {
       return;
     }
     let idComment = this.props.id;
-    this.props.isEditComment(idComment, textComment);
+    this.props.onEditComment(idComment, textComment);
   };
 
   render() {
@@ -63,14 +63,14 @@ export default class Comments extends React.Component {
 }
 
 Comments.propTypes = {
-  deleteComment: PropTypes.func.isRequired,
-  isEditComment: PropTypes.func.isRequired,
-  changeFormComment: PropTypes.bool.isRequired,
+  id: PropTypes.number.isRequired,
+  deletComment: PropTypes.func.isRequired,
+  onEditComment: PropTypes.func.isRequired,
+  changeFormComment: PropTypes.bool,
   comment: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };
 Comments.defaultProps = {
-  changeFormComment: false,
-  comment: 'text comment',
+  comment: '',
   name: 'Annon'
 };

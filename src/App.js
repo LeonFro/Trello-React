@@ -8,7 +8,7 @@ import Header from './components/Header';
 import { addName } from './reducers/name';
 import {
   getName,
-  getCardsComments,
+  getComments,
   getCards,
   getColumnNames,
 } from './selectors';
@@ -17,11 +17,13 @@ import {
   deleteCard,
   changeTitleCard,
   addDescriptions,
+} from './reducers/cards';
+import {
   addComment,
   deleteComment,
   cangeComment,
-} from './reducers/card';
-import { saveTitle } from './reducers/column';
+} from'./reducers/comments';
+import { saveTitleColumn } from './reducers/columnNames';
 import './App.css';
 
 const App = ({
@@ -30,7 +32,7 @@ const App = ({
   cardList,
   listComments,
   addCard,
-  saveTitle,
+  saveTitleColumn,
   deleteCard,
   addDescriptions,
   addComment,
@@ -56,14 +58,14 @@ const App = ({
             id={column.id}
             title={column.name}
             listComments={listComments}
-            addNewCard={addCard}
-            newTitle={saveTitle}
-            deletCard={deleteCard}
-            addText={addDescriptions}
-            addNewComment={addComment}
-            deletCom={deleteComment}
+            addCard={addCard}
+            saveTitleColumn={saveTitleColumn}
+            onDeletCard={deleteCard}
+            addDescription={addDescriptions}
+            onAddComment={addComment}
+            deletComment={deleteComment}
             onEditComment={cangeComment}
-            onSaveTitle={changeTitleCard}
+            onEditTitleCard={changeTitleCard}
           />))}
       </div>
     </div>
@@ -72,7 +74,7 @@ const App = ({
 
 const mapStateToProps = state => ({
   name: getName(state),
-  listComments: getCardsComments(state),
+  listComments: getComments(state),
   cardList: getCards(state),
   columnlist:getColumnNames(state),
 });
@@ -81,7 +83,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   {
     addName,
     addCard,
-    saveTitle,
+    saveTitleColumn,
     deleteCard,
     addDescriptions,
     addComment,
@@ -97,17 +99,19 @@ export default connect(
 )(App);
 
 App.propTypes = {
-  saveTitle: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
   addName: PropTypes.func.isRequired,
+  cardList: PropTypes.object.isRequired,
+  listComments: PropTypes.array.isRequired,
   addCard: PropTypes.func.isRequired,
+  saveTitleColumn: PropTypes.func.isRequired,
   deleteCard: PropTypes.func.isRequired,
   addDescriptions: PropTypes.func.isRequired,
   addComment: PropTypes.func.isRequired,
   deleteComment: PropTypes.func.isRequired,
   cangeComment: PropTypes.func.isRequired,
   changeTitleCard: PropTypes.func.isRequired,
+  columnlist: PropTypes.array.isRequired,
   id: PropTypes.string,
-  cardList: PropTypes.object.isRequired,
-  name: PropTypes.string.isRequired,
-  listComments: PropTypes.array.isRequired,
 };
+
